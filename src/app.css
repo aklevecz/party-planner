@@ -1,0 +1,61 @@
+:root {
+	--color-background: darkslategrey;
+	--color-foreground: rgba(245, 245, 245, 0.683);
+	--color-interactive: rgb(68, 116, 116);
+	--border-radius: 5px;
+	--padding-interactive: 5px 16px;
+	--font-size-interactive: 1.25rem;
+}
+
+html,
+body {
+	font-family: sans-serif;
+	background-color: var(--color-background);
+	color: var(--color-foreground);
+}
+
+button {
+	margin: auto;
+}
+
+button,
+input,
+textarea {
+	font-size: var(--font-size-interactive);
+	background-color: var(--color-interactive);
+	color: var(--color-foreground);
+	border: 1px solid var(--color-foreground);
+	border-radius: var(--border-radius);
+	padding: var(--padding-interactive);
+}
+
+textarea {
+	font-size: 1rem;
+	height: 140px;
+	padding: 1rem;
+}
+
+button {
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: color-mix(in srgb, var(--color-interactive) 85%, white);
+}
+
+input,
+textarea {
+	outline: none;
+	background-color: color-mix(in srgb, var(--color-background) 70%, black);
+}
+
+input:focus,
+textarea:focus {
+	border-color: color-mix(in srgb, var(--color-foreground) 85%, white);
+	box-shadow: 0 0 0 1px var(--color-foreground);
+}
+
+input::placeholder,
+textarea::placeholder {
+	color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
+}

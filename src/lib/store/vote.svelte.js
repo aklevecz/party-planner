@@ -1,0 +1,3 @@
+const createVoteStore = () => {
+    const {} = $state();
+}
