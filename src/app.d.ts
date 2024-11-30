@@ -9,7 +9,8 @@ declare global {
 		interface Platform {
 			env: {
 				DATABASE: D1Database;
-			}
+				PARTY_KV: KVNamespace;
+			};
 		}
 	}
 }

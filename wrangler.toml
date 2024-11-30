@@ -41,12 +41,8 @@ database_id = "476fa768-0f3f-4121-9820-7cf92be3ee6b"
 # Bind a KV Namespace. Use KV as persistent storage for small key-value pairs.
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#kv-namespaces
 [[kv_namespaces]]
-binding = "FLOWERS_KV"
-id = "48ee64bf24344bed8b80d5155545cbc0"
-
-[[kv_namespaces]]
-binding = "BAO_GEN"
-id = "528fcbf59de34d62baa9a93439a5791e"
+binding = "PARTY_KV"
+id = "7aa5d709aeb24affbd314a7d9e4bd06a"
 
 # Bind a Queue producer. Use this binding to schedule an arbitrary task that may be processed later by a Queue consumer.
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#queue-producers

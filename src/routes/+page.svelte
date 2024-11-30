@@ -1,6 +1,9 @@
 <script>
 	import ApplyContainer from '$lib/components/apply/apply-container.svelte';
+	import AuthFlow from '$lib/components/auth/auth-flow.svelte';
+	import VoteContainer from '$lib/components/vote/vote-container.svelte';
 	import app from '$lib/store/app.svelte.js';
+	import authSvelte from '$lib/store/auth.svelte';
 	let { data } = $props();
 
 	$effect(() => {
@@ -9,11 +12,15 @@
 </script>
 
 <div class="container">
-	<div>Let's throw a party at The Faight</div>
+	<div style="font-size:1.5rem;">Let's throw a party at The Faight Collective</div>
 	<div>This site will continue to evolve and be apart of the party</div>
-	<div>But first I need help managing the project because I suck at that</div>
-	<div>________</div>
+	<div
+		style="background-color: var(--color-interactive); height:10px; width:100%;margin:1rem 0;"
+	></div>
 	<ApplyContainer />
+	<VoteContainer />
+	<div>{authSvelte.state.user.phoneNumber}</div>
+	<AuthFlow />
 </div>
 
 <style>
@@ -22,7 +29,7 @@
 		flex-direction: column;
 		justify-content: center;
 		padding: 1rem;
-		gap: .5rem;
+		gap: 0.5rem;
 		/* align-items: center; */
 	}
 	p {

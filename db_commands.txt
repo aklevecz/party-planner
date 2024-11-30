@@ -1,1 +1,2 @@
-npx wrangler d1 execute DATABASE --local --command "CREATE TABLE party_planner_apply (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, message TEXT NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"
+npx wrangler d1 execute DATABASE --local --command "DROP TABLE IF EXISTS party_planner_apply;"
+npx wrangler d1 execute DATABASE --local --command "CREATE TABLE party_planner_apply (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL UNIQUE, message TEXT NOT NULL, feedback TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"
