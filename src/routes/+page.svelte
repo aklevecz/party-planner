@@ -1,9 +1,6 @@
 <script>
 	import ApplyContainer from '$lib/components/apply/apply-container.svelte';
-	import AuthFlow from '$lib/components/auth/auth-flow.svelte';
-	import VoteContainer from '$lib/components/vote/vote-container.svelte';
 	import app from '$lib/store/app.svelte.js';
-	import authSvelte from '$lib/store/auth.svelte';
 	let { data } = $props();
 
 	$effect(() => {
@@ -17,10 +14,11 @@
 	<div
 		style="background-color: var(--color-interactive); height:10px; width:100%;margin:1rem 0;"
 	></div>
+		<img src="/raptor-svg.svg" alt="raptor" style="width:200px;margin:0rem auto 1rem;display:block;"/>
+
 	<ApplyContainer />
-	<VoteContainer />
-	<div>{authSvelte.state.user.phoneNumber}</div>
-	<AuthFlow />
+	<!-- {#if authSvelte.state.authorized}<VoteContainer />{/if} -->
+	<!-- <AuthFlow /> -->
 </div>
 
 <style>
@@ -30,9 +28,8 @@
 		justify-content: center;
 		padding: 1rem;
 		gap: 0.5rem;
+		margin: auto;
+		max-width: 500px;
 		/* align-items: center; */
-	}
-	p {
-		font-size: 1.2rem;
 	}
 </style>

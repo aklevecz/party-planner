@@ -2,6 +2,8 @@ import db from '$lib/db';
 import { responses } from '$lib/responses';
 import { json } from '@sveltejs/kit';
 
+import { createJwt } from '$lib/auth.server';
+
 /** @type {import('./$types').RequestHandler} */
 export async function GET() {
 	return new Response();
@@ -24,7 +26,7 @@ export async function POST({ request, cookies, platform }) {
 			return success(testPhoneNumber);
 		}
 		// const r = await platform?.env.AUTH_SERVICE.sendCode(phoneNumber);
-		// if (r.status === 'pendig') {
+		// if (r.status === 'pending') {
 		// 	return success(r.phoneNumber);
 		// }
 	}
@@ -38,7 +40,7 @@ export async function POST({ request, cookies, platform }) {
 				// const token = await platform?.env.AUTH_SERVICE.generateToken({
 				// 	phoneNumber: storedPhoneNumber
 				// });
-                const token = "AKJSLKAJSDLKJASKLJ"
+                const token = await createJwt({ phoneNumber: storedPhoneNumber });
 				try {
 					await db.createRaptor(platform?.env.DATABASE, { phoneNumber: storedPhoneNumber });
 				} catch (e) {

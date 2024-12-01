@@ -1,8 +1,7 @@
 <script>
+	import { goto } from '$app/navigation';
 	import applySvelte from '$lib/store/apply.svelte';
-
-	/** @type {{nextView: () => void}} props */
-	let { nextView } = $props();
+	import RaptorAnimated from '../raptor-animated.svelte';
 
 	let { id, name, email, message } = $state(applySvelte.state);
 
@@ -13,20 +12,24 @@
 		id = applySvelte.state.id;
 	});
 
-	function onApply() {
-		applySvelte.apply({ name, email, message });
-        nextView()
+	async function onApply() {
+		if (!name || !email || !message) return;
+		await applySvelte.apply({ name, email, message });
+        // nextView()
+		goto('/?view=receipt');
 	}
+
+	let isFilledOut = $derived(name && email && message);
 </script>
 
 <div class="apply-form">
-    <div style="font-weight:bold;">Please provide your name and email, and a message about why you would like to help manage this event</div>
+    <div style="font-weight:bold;">Please provide your name, email, and a message about what you would like to do for the event</div>
 	<!-- <div>Some of the pillars of the event include: art, music, entry</div> -->
 	<!-- <div>It can be specific or general, and even if there isn't a particularly good fit for what you would like to do, you can still help out in other ways</div> -->
 	<input bind:value={name} type="text" placeholder="Name" />
 	<input bind:value={email} type="text" placeholder="Email" />
-	<textarea bind:value={message} placeholder="Message"></textarea>
-	<button onclick={onApply}>Apply</button>
+	<textarea bind:value={message} placeholder="Stuff you would like to do"></textarea>
+	<button disabled={applySvelte.fetching || !isFilledOut} onclick={onApply}>{#if applySvelte.fetching}<RaptorAnimated />{:else}Apply{/if}</button>
 </div>
 
 <style>

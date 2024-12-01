@@ -1,40 +1,66 @@
-const api = function () {
-    return {
-        /** @param {string} id @param {string} option */
-        vote: async (id, option) => {
-            const response = await fetch('/api/vote', {
-                method: 'POST',
+const api = (function () {
+	return {
+		/** @param {string} id @param {string} option */
+		vote: async (id, option) => {
+			const response = await fetch('/api/vote', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					id,
+					option
+				})
+			});
+			const data = await response.json();
+			return data;
+		},
+        getUserVote: async () => {
+            const response = await fetch('/api/vote?type=user', {
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    id,
-                    option
-                })
+                }
+            });
+            const data = await response.json();
+            return data;
+        },
+        getAllVotes: async () => {
+            const response = await fetch('/api/vote?type=all', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
             const data = await response.json();
             return data;
         }
-    };
-}();
-
+	};
+})();
 
 /**
  * @param {string} id
  * @param {Record<string, number>} options
  */
 const createVoteStore = (id, options) => {
-	let vote = $state({ id, options });
+	let vote = $state({ id, options, votes: [] });
 
 	return {
 		get state() {
 			return vote;
 		},
-        /** @param {string} option */
+		/** @param {string} option */
 		vote: async (option) => {
 			const data = await api.vote(id, option);
-			vote = data;
-		}
+			vote.votes = data.votes;
+		},
+        getUserVote: async () => {
+            return await api.getUserVote();
+        },
+        getAllVotes: async () => {
+            const allVotes = await api.getAllVotes();
+            vote.votes = allVotes;
+        }
 	};
 };
 

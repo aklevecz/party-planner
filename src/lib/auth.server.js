@@ -13,7 +13,7 @@ const toBase64Url = (base64) => {
 };
 
 /**
- * @param {{id: string}} payload
+ * @param {*} payload
  * @returns {Promise<string>} jwt token
  */
 export async function createJwt(payload) {
@@ -77,7 +77,7 @@ var verifySignature = async (base64urlSignature, value, secret) => {
 /**
  *
  * @param {string} jwt
- * @returns {Promise<{id: string}>} payload
+ * @returns {Promise<*>} payload
  *  */
 export var verifyAndDecodeJwt = async (jwt) => {
 	const parts = jwt.split('.');

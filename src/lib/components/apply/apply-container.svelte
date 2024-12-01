@@ -18,21 +18,23 @@
 	<div>{applySvelte.state.message}</div>
 	<button onclick={goToApplyForm}>Edit</button>
 {:else if !hasApplied && app.view === 'intro'}
-	<div>This will be a collective effort</div>
-	<div>Firstly we would like to find people interested in being</div>
+	<div>This will fittingly be a collective effort</div>
+	<div>Interested in helping out?</div>
+	<div>Apply to be part of the party planning</div>
+	<!-- <div>Firstly we would like to find people interested in being</div>
 	<h3>Project Managers</h3>
 	<div>Do you enjoy organizing ideas, people, and scheduling?</div>
-	<div>Well boy howdy let's see if we can find your talents a place for this rager</div>
-	<button style="margin: 2rem auto;" onclick={goToApplyForm}>Apply</button>
+	<div>Well boy howdy let's see if we can find your talents a place for this rager</div> -->
+	<button style="margin: 2rem auto;font-size:1.5rem;" onclick={goToApplyForm}>Apply</button>
 {/if}
 
 {#if app.view === 'apply-form'}
-	<ApplyForm nextView={() => goto('/?view=receipt')} />
+	<ApplyForm />
 {/if}
 {#if app.view === 'receipt'}
 	<h3>You have applied!</h3>
 	<div>We'll be in touch :)</div>
-	<h3 style="margin-top:1rem;">your info</h3>
+	<h3 style="margin-top:1rem;"></h3>
 	<div>{applySvelte.state.name}</div>
 	<div>{applySvelte.state.email}</div>
 	<div>{applySvelte.state.message}</div>
@@ -49,5 +51,8 @@
 <style>
 	h3 {
 		margin: 0;
+	}
+	div {
+		font-size: 1.2rem;
 	}
 </style>

@@ -1,3 +1,5 @@
+import { delay } from "$lib/utils";
+
 const endpoints = {
 	apply: 'api/apply'
 };
@@ -39,7 +41,7 @@ const api = (function () {
 })();
 const createApplyStore = () => {
 	let apply = $state({ id: 0, name: '', email: '', message: '' });
-	let { id, name, email, message } = apply;
+	let fetching = $state(false);
 
 	return {
 		get state() {
@@ -47,6 +49,7 @@ const createApplyStore = () => {
 		},
 		/** @param {{ name: string; email: string; message: string; }} data */
 		apply: async ({ name, email, message }) => {
+			fetching = true;
 			const data = await api.apply({
 				name,
 				email,
@@ -54,6 +57,8 @@ const createApplyStore = () => {
 			});
 			const newState = { id: data.id, name: data.name, email: data.email, message: data.message };
 			apply = newState;
+			await delay(2000)
+			fetching = false;
 		},
 		/** @param {string} existingRecordId */
 		getExistingRecord: async (existingRecordId) => {
@@ -68,6 +73,9 @@ const createApplyStore = () => {
 		},
 		reset: () => {
 			api.reset();
+		},
+		get fetching() {
+			return fetching;
 		}
 	};
 };

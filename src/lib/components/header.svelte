@@ -1,5 +1,5 @@
 <div class="container">
-	<img src="/raptor-svg.svg" alt="raptor" />
+	<!-- <img src="/raptor-svg.svg" alt="raptor" /> -->
 	<h1>Faight Party</h1>
 </div>
 <style>

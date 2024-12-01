@@ -4,6 +4,7 @@
 
 	import Header from '$lib/components/header.svelte';
 	import '../app.css';
+	import authSvelte from '$lib/store/auth.svelte';
 
 	/** @type {{ data: import('./$types').LayoutData, children: import('svelte').Snippet }} */
 	let { data, children } = $props();
@@ -12,9 +13,45 @@
 		if (data.applyId) {
 			applySvelte.getExistingRecord(data.applyId);
 		}
+		authSvelte.init(data);
 	});
 </script>
 
+<svelte:head>
+	<!-- Basic Meta Tags -->
+	<title>Raptor Party - Faight Collective</title>
+	<meta
+		name="description"
+		content="Join the Raptor Party at Faight Collective - Experience the revolution in collective thinking and collaboration"
+	/>
+	<meta name="keywords" content="Raptor Party, Faight Collective, collaboration, community" />
+	<meta name="author" content="Faight Collective" />
+
+	<!-- Open Graph Meta Tags -->
+	<meta property="og:title" content="Raptor Party - Faight Collective" />
+	<meta
+		property="og:description"
+		content="Join the Raptor Party at Faight Collective - Experience the revolution in collective thinking and collaboration"
+	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://faight.raptor.pizza" />
+	<meta property="og:image" content="https://faight.raptor.pizza/raptor-svg.svg" />
+	<meta property="og:site_name" content="Faight Collective" />
+
+	<!-- Twitter Card Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Raptor Party - Faight Collective" />
+	<meta
+		name="twitter:description"
+		content="Join the Raptor Party at Faight Collective - Experience the revolution in collective thinking and collaboration"
+	/>
+	<meta name="twitter:image" content="https://faight.raptor.pizza/raptor-svg.svg" />
+
+	<!-- Additional Meta Tags -->
+	<meta name="theme-color" content="#ff0000" />
+	<meta name="robots" content="index, follow" />
+	<link rel="canonical" href="https://faight.raptor.pizza" />
+</svelte:head>
 <Header />
 {@render children()}
 <!-- <div>Brought to you by Raptor enterprises</div> -->
