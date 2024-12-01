@@ -17,6 +17,6 @@ export async function load({ cookies, platform }) {
 	).all();
 
 	let votes = await voteKv(platform).getAllVotes();
-
+	console.log(votes)
 	return { records, votes, raptorResults };
 }

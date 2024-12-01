@@ -52,7 +52,9 @@ const createVoteStore = (id, options) => {
 		/** @param {string} option */
 		vote: async (option) => {
 			const data = await api.vote(id, option);
-			vote.votes = data.votes;
+            const allVotes = await api.getAllVotes();
+			vote.votes = allVotes;
+			// vote.votes = data.votes;
 		},
         getUserVote: async () => {
             return await api.getUserVote();
