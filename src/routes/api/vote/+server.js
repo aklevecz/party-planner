@@ -2,6 +2,26 @@ import { verifyAndDecodeJwt } from '$lib/auth.server';
 import voteKv from '$lib/vote.server';
 import { json } from '@sveltejs/kit';
 
+/**
+ * Adds HTTP headers to disable browser caching.
+ *
+ * The headers are as follows:
+ *   - Cache-Control: no-cache, no-store, must-revalidate
+ *   - Pragma: no-cache
+ *   - Expires: 0
+ *
+ * The headers are added to the given response object.
+ *
+ * @param {Response} response - A Response object.
+ * @returns {Response} - The response with the no-cache headers.
+ */
+const addNoCacheHeaders = (response) => {
+	response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+	response.headers.set('Pragma', 'no-cache');
+	response.headers.set('Expires', '0');
+	return response;
+};
+
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ cookies, platform, url }) {
 	const type = url.searchParams.get('type');
@@ -18,12 +38,12 @@ export async function GET({ cookies, platform, url }) {
 			voteId: 'date',
 			userId: decoded.phoneNumber
 		});
-		return json(vote);
+		return addNoCacheHeaders(json(vote))
 	}
 
     if (type === 'all') {
         const votes = await voteKv(platform).getAllVotes();
-        return json(votes);
+        return addNoCacheHeaders(json(votes))
     }
 
     return new Response(null, { status: 401 });
@@ -51,5 +71,5 @@ export async function POST({ cookies, platform, request }) {
 	// }
 	const votes = await kv.getAllVotes();
 	// return data;
-	return json({ success: true, votes });
+	return addNoCacheHeaders(json({ success: true, votes }))
 }

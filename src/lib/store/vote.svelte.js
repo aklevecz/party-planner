@@ -1,12 +1,17 @@
+const noCacheHeaders = {
+	'Content-Type': 'application/json',
+	'Cache-Control': 'no-cache, no-store, must-revalidate',
+	Pragma: 'no-cache',
+	Expires: '0'
+};
+
 const api = (function () {
 	return {
 		/** @param {string} id @param {string} option */
 		vote: async (id, option) => {
 			const response = await fetch('/api/vote', {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
+				headers: noCacheHeaders,
 				body: JSON.stringify({
 					id,
 					option
@@ -15,26 +20,22 @@ const api = (function () {
 			const data = await response.json();
 			return data;
 		},
-        getUserVote: async () => {
-            const response = await fetch('/api/vote?type=user', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const data = await response.json();
-            return data;
-        },
-        getAllVotes: async () => {
-            const response = await fetch('/api/vote?type=all', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const data = await response.json();
-            return data;
-        }
+		getUserVote: async () => {
+			const response = await fetch('/api/vote?type=user', {
+				method: 'GET',
+				headers: noCacheHeaders
+			});
+			const data = await response.json();
+			return data;
+		},
+		getAllVotes: async () => {
+			const response = await fetch('/api/vote?type=all', {
+				method: 'GET',
+				headers: noCacheHeaders
+			});
+			const data = await response.json();
+			return data;
+		}
 	};
 })();
 
@@ -52,17 +53,17 @@ const createVoteStore = (id, options) => {
 		/** @param {string} option */
 		vote: async (option) => {
 			const data = await api.vote(id, option);
-            const allVotes = await api.getAllVotes();
+			const allVotes = await api.getAllVotes();
 			vote.votes = allVotes;
 			// vote.votes = data.votes;
 		},
-        getUserVote: async () => {
-            return await api.getUserVote();
-        },
-        getAllVotes: async () => {
-            const allVotes = await api.getAllVotes();
-            vote.votes = allVotes;
-        }
+		getUserVote: async () => {
+			return await api.getUserVote();
+		},
+		getAllVotes: async () => {
+			const allVotes = await api.getAllVotes();
+			vote.votes = allVotes;
+		}
 	};
 };
 
