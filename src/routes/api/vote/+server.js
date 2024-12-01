@@ -77,6 +77,7 @@ export async function POST({ cookies, platform, request }) {
 	if (!usersVote) {
 		console.log(`add in the user`)
 		votes.push({ voter: decoded.phoneNumber, vote: option });
+		console.log(`votes: ${JSON.stringify(votes)}`)
 	}
 	// return data;
 	return addNoCacheHeaders(json({ success: true, votes: votes.map(v => v.vote) }))

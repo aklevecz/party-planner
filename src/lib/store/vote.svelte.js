@@ -53,9 +53,9 @@ const createVoteStore = (id, options) => {
 		},
 		/** @param {string} option */
 		vote: async (option) => {
-			const data = await api.vote(id, option);
-			const allVotes = await api.getAllVotes();
-			vote.votes = allVotes;
+			const allVotes = await api.vote(id, option);
+			// const allVotes = await api.getAllVotes();
+			vote.votes = allVotes.votes;
 			// vote.votes = data.votes;
 		},
 		getUserVote: async () => {
