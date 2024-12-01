@@ -16,7 +16,6 @@ export async function load({ cookies, platform }) {
 		'SELECT * FROM raptors'
 	).all();
 
-	let votes = await voteKv(platform).getAllVotes();
-	console.log(votes)
-	return { records, votes, raptorResults };
+	let votes = await voteKv(platform).getAllVotes({voteId: 'date'});
+	return { records, votes: votes || [], raptorResults };
 }

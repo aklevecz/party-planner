@@ -24,6 +24,7 @@
 	function handleDelete(id) {
 		records = records.filter((record) => record.id !== id);
 	}
+	console.log(data);
 </script>
 
 <div class="container">
@@ -37,7 +38,13 @@
 			class="search-input"
 		/>
 	</div>
-
+	<div>
+		{#each data.votes as vote}
+			<div>
+				{vote}
+			</div>
+		{/each}
+	</div>
 	<div class="table-container">
 		<table>
 			<thead>

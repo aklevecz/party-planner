@@ -34,6 +34,7 @@ const api = (function () {
 				headers: noCacheHeaders
 			});
 			const data = await response.json();
+            console.log(`getAllVotes: ${JSON.stringify(data)}`)
 			return data;
 		}
 	};

@@ -10,9 +10,10 @@ const voteKv = (platform) => {
         getUserVote: async ({voteId, userId}) => {
             return await platform?.env.PARTY_KV.get(`${voteId}:vote:${userId}`);
         },
-		getAllVotes: async () => {
+        /** @param {{voteId:string}} props */
+		getAllVotes: async ({voteId}) => {
 			let votes = [];
-			const allVotes = await platform?.env.PARTY_KV.list({ prefix: 'date:vote:' });
+			const allVotes = await platform?.env.PARTY_KV.list({ prefix: `${voteId}:vote:` });
 			for (let i = 0; i < allVotes.keys.length; i++) {
 				const vote = await platform?.env.PARTY_KV.get(allVotes.keys[i].name);
 				votes.push(vote);

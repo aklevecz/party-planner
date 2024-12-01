@@ -42,7 +42,7 @@ export async function GET({ cookies, platform, url }) {
 	}
 
     if (type === 'all') {
-        const votes = await voteKv(platform).getAllVotes();
+        const votes = await voteKv(platform).getAllVotes({voteId: 'date'});
         return addNoCacheHeaders(json(votes))
     }
 
@@ -69,7 +69,7 @@ export async function POST({ cookies, platform, request }) {
 	// 	const vote = await platform?.env.PARTY_KV.get(allVotes.keys[i].name);
 	// 	votes.push(vote);
 	// }
-	const votes = await kv.getAllVotes();
+	const votes = await kv.getAllVotes({voteId: 'date'});
 	// return data;
 	return addNoCacheHeaders(json({ success: true, votes }))
 }
