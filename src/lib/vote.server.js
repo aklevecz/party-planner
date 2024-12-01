@@ -12,6 +12,7 @@ const voteKv = (platform) => {
         },
         /** @param {{voteId:string}} props */
 		getAllVotes: async ({voteId}) => {
+            /** @type {string[]} */
 			let votes = [];
 			const allVotes = await platform?.env.PARTY_KV.list({ prefix: `${voteId}:vote:` });
 			for (let i = 0; i < allVotes.keys.length; i++) {
