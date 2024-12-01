@@ -22,7 +22,7 @@
 	<title>Raptor Party - Faight Collective</title>
 	<meta
 		name="description"
-		content="Join the Raptor Party at Faight Collective - Experience the revolution in collective thinking and collaboration"
+		content="Join the Raptor Party at Faight Collective - Experience the revolution in collective collaboration"
 	/>
 	<meta name="keywords" content="Raptor Party, Faight Collective, collaboration, community" />
 	<meta name="author" content="teh raptor" />
@@ -31,7 +31,7 @@
 	<meta property="og:title" content="Raptor Party - Faight Collective" />
 	<meta
 		property="og:description"
-		content="Join the Raptor Party at Faight Collective - Experience the revolution in collective thinking and collaboration"
+		content="Join the Raptor Party at Faight Collective - Experience the revolution in collective collaboration"
 	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://faight.raptor.pizza" />
@@ -45,7 +45,7 @@
 	<meta name="twitter:title" content="Raptor Party - Faight Collective" />
 	<meta
 		name="twitter:description"
-		content="Join the Raptor Party at Faight Collective - Experience the revolution in collective thinking and collaboration"
+		content="Join the Raptor Party at Faight Collective - Experience the revolution in collective collaboration"
 	/>
 	<meta name="twitter:image" content="https://faight.raptor.pizza/remi-raptor.png" />
 
