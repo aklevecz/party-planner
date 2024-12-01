@@ -36,8 +36,8 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://faight.raptor.pizza" />
 	<meta property="og:image" content="https://faight.raptor.pizza/remi-raptor.png" />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
+	<meta property="og:image:width" content="1080" />
+	<meta property="og:image:height" content="1080" />
 	<meta property="og:site_name" content="Raptor Party - Faight Collective" />
 
 	<!-- Twitter Card Meta Tags -->
