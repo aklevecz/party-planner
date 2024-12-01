@@ -1,7 +1,7 @@
 import { verifyAndDecodeJwt } from '$lib/auth.server';
 
 /** @type {import('./$types').LayoutServerLoad} */
-export async function load({ cookies, url }) {
+export async function load({ cookies, platform, url }) {
 	/** @type {View | null} */
 	const view = /** @type {View} */ (url.searchParams.get('view')) || 'intro';
 	const applyId = cookies.get('applyId');
@@ -9,7 +9,8 @@ export async function load({ cookies, url }) {
 	let authorized = false;
 	let user = { phoneNumber: '' };
 	if (token) {
-		let decoded = await verifyAndDecodeJwt(token);
+		// let decoded = await verifyAndDecodeJwt(token);
+        let decoded = await platform?.env.AUTH_SERVICE.authorizeToken(token);
         if (decoded.phoneNumber) {
             user = decoded;
             authorized = true;

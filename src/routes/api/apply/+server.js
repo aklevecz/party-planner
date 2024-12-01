@@ -7,7 +7,8 @@ export async function GET({ platform, url }) {
 	if (!token) {
 		return json(null);
 	}
-	const { id } = await verifyAndDecodeJwt(token);
+	// const { id } = await verifyAndDecodeJwt(token);
+	let { id } = await platform?.env.AUTH_SERVICE.authorizeToken(token);
 	const existingRecord = await platform?.env.DATABASE.prepare(
 		'SELECT * FROM party_planner_apply WHERE id = ?'
 	)

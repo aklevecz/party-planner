@@ -30,7 +30,8 @@ export async function GET({ cookies, platform, url }) {
 		if (!token) {
 			return new Response(null, { status: 401 });
 		}
-		const decoded = await verifyAndDecodeJwt(token);
+		// const decoded = await verifyAndDecodeJwt(token);
+		const decoded = await platform?.env.AUTH_SERVICE.authorizeToken(token);
 		if (!decoded.phoneNumber) {
 			return new Response(null, { status: 401 });
 		}
@@ -55,7 +56,8 @@ export async function POST({ cookies, platform, request }) {
 	if (!token) {
 		return new Response(null, { status: 401 });
 	}
-	const decoded = await verifyAndDecodeJwt(token);
+	// const decoded = await verifyAndDecodeJwt(token);
+	const decoded = await platform?.env.AUTH_SERVICE.authorizeToken(token);
 	if (!decoded.phoneNumber) {
 		return new Response(null, { status: 401 });
 	}
