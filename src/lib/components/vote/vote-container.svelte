@@ -5,34 +5,34 @@
 	let selectedOption = $state('');
 	let hasVoted = $state(false);
 
-    onMount(() => {
-        dateVote.getUserVote().then((vote) => {
-            if (vote) {
-                selectedOption = vote;
-                hasVoted = true;
-            }
-        });
-        dateVote.getAllVotes()
-    });
+	onMount(() => {
+		dateVote.getUserVote().then((vote) => {
+			if (vote) {
+				selectedOption = vote;
+				hasVoted = true;
+			}
+		});
+		dateVote.getAllVotes();
+	});
 
 	/** @param {string} option */
 	function handleVote(option) {
 		// if (!hasVoted) {
-			selectedOption = option;
-			hasVoted = true;
-			dateVote.vote(option);
+		selectedOption = option;
+		hasVoted = true;
+		dateVote.vote(option);
 		// }
 	}
 
-    /** @param {string} option */
-    function getVoteCount(option) {
-        return dateVote.state.votes.reduce((acc, vote) => {
-            if (vote === option) {
-                return acc + 1;
-            }
-            return acc;
-        }, 0);
-    }
+	/** @param {string} option */
+	function getVoteCount(option) {
+		return dateVote.state.votes.reduce((acc, vote) => {
+			if (vote === option) {
+				return acc + 1;
+			}
+			return acc;
+		}, 0);
+	}
 
 	/** @param {string} option */
 	function getPercentage(option) {
@@ -77,7 +77,7 @@
 		max-width: 500px;
 		margin: 20px auto;
 		padding: 20px;
-		background: #fff;
+		background: var(--color-foreground);
 		border-radius: 12px;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 	}
@@ -85,7 +85,6 @@
 	h3 {
 		margin: 0 0 20px 0;
 		font-size: 1.5rem;
-		color: #333;
 		text-align: center;
 	}
 
@@ -101,7 +100,7 @@
 		padding: 16px;
 		border: 2px solid #e0e0e0;
 		border-radius: 8px;
-		background: transparent;
+		background: var(--color-foreground);
 		cursor: pointer;
 		overflow: hidden;
 		text-align: left;
@@ -134,7 +133,6 @@
 
 	.option-text {
 		font-size: 1rem;
-		color: #333;
 	}
 
 	.vote-count {
@@ -155,7 +153,7 @@
 	.thank-you {
 		margin-top: 20px;
 		text-align: center;
-		color: #4a90e2;
+		color: var(--color-interactive);
 		font-size: 0.9rem;
 	}
 

@@ -16,7 +16,7 @@
 	<div>{applySvelte.state.name}</div>
 	<div>{applySvelte.state.email}</div>
 	<div>{applySvelte.state.message}</div>
-	<button onclick={goToApplyForm}>Edit</button>
+	<button onclick={goToApplyForm}>Change Answers</button>
 {:else if !hasApplied && app.view === 'intro'}
 	<div>This will fittingly be a collective effort</div>
 	<div>Interested in helping out?</div>

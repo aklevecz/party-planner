@@ -123,7 +123,7 @@
 
 <style>
 	.rsvp-container {
-		background-color: #0000004d;
+		/* background-color: #0000004d; */
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;

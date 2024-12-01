@@ -14,7 +14,7 @@
 	<div
 		style="background-color: var(--color-interactive); height:10px; width:100%;margin:1rem 0;"
 	></div>
-		<img src="/raptor-svg.svg" alt="raptor" style="width:200px;margin:0rem auto 1rem;display:block;"/>
+		<img src="/raptor-svg.svg" alt="raptor" style="width:200px;height:200px;margin:0rem auto 1rem;display:block;"/>
 
 	<ApplyContainer />
 	<!-- {#if authSvelte.state.authorized}<VoteContainer />{/if} -->
