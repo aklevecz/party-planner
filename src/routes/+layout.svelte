@@ -50,7 +50,7 @@
 	<meta name="twitter:image" content="https://faight.raptor.pizza/remi-raptor.png" />
 
 	<!-- Additional Meta Tags -->
-	<meta name="theme-color" content="#ff0000" />
+	<meta name="theme-color" content="#2f4f4f" />
 	<meta name="robots" content="index, follow" />
 	<link rel="canonical" href="https://faight.raptor.pizza" />
 </svelte:head>
