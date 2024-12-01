@@ -72,8 +72,10 @@ export async function POST({ cookies, platform, request }) {
 	// 	votes.push(vote);
 	// }
 	let votes = await kv.getAllVotes({voteId: 'date'});
+	console.log(`all votes: ${JSON.stringify(votes)}`)
 	const usersVote = votes.find(v => v.voter === decoded.phoneNumber);
 	if (!usersVote) {
+		console.log(`add in the user`)
 		votes.push({ voter: decoded.phoneNumber, vote: option });
 	}
 	// return data;
