@@ -10,6 +10,7 @@ declare global {
 			env: {
 				DATABASE: D1Database;
 				PARTY_KV: KVNamespace;
+				AUTH_SERVICE: any;
 			};
 		}
 	}

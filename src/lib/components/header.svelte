@@ -173,6 +173,11 @@
 	.desktop-nav {
 		display: none;
 	}
+    
+    .desktop-nav ul {
+        display: flex;
+        gap: 1rem;
+    }
 
 	.mobile-nav a,
 	.desktop-nav a {

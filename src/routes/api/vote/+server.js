@@ -43,7 +43,7 @@ export async function GET({ cookies, platform, url }) {
 
     if (type === 'all') {
         const votes = await voteKv(platform).getAllVotes({voteId: 'date'});
-        return addNoCacheHeaders(json(votes))
+        return addNoCacheHeaders(json(votes.map(v => v.vote)))
     }
 
     return new Response(null, { status: 401 });
@@ -69,7 +69,11 @@ export async function POST({ cookies, platform, request }) {
 	// 	const vote = await platform?.env.PARTY_KV.get(allVotes.keys[i].name);
 	// 	votes.push(vote);
 	// }
-	const votes = await kv.getAllVotes({voteId: 'date'});
+	let votes = await kv.getAllVotes({voteId: 'date'});
+	const usersVote = votes.find(v => v.voter === decoded.phoneNumber);
+	if (!usersVote) {
+		votes.push({ voter: decoded.phoneNumber, vote: option });
+	}
 	// return data;
-	return addNoCacheHeaders(json({ success: true, votes }))
+	return addNoCacheHeaders(json({ success: true, votes: votes.map(v => v.vote) }))
 }

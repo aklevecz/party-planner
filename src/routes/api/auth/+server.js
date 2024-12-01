@@ -13,7 +13,7 @@ const testPhoneNumber = myNumber;
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, cookies, platform }) {
 	const { phoneNumber, code } = await request.json();
-
+	console.log(platform?.env.AUTH_SERVICE)
 	// sending code
 	if (phoneNumber) {
 		/** @param {string} phoneNumber */
@@ -25,10 +25,10 @@ export async function POST({ request, cookies, platform }) {
 		if (phoneNumber === testPhoneNumber) {
 			return success(testPhoneNumber);
 		}
-		// const r = await platform?.env.AUTH_SERVICE.sendCode(phoneNumber);
-		// if (r.status === 'pending') {
-		// 	return success(r.phoneNumber);
-		// }
+		const r = await platform?.env.AUTH_SERVICE.sendCode(phoneNumber);
+		if (r.status === 'pending') {
+			return success(r.phoneNumber);
+		}
 	}
 
 	// verifying code
@@ -37,10 +37,10 @@ export async function POST({ request, cookies, platform }) {
 
 		if (storedPhoneNumber) {
 			const approved = async () => {
-				// const token = await platform?.env.AUTH_SERVICE.generateToken({
-				// 	phoneNumber: storedPhoneNumber
-				// });
-                const token = await createJwt({ phoneNumber: storedPhoneNumber });
+				const token = await platform?.env.AUTH_SERVICE.generateToken({
+					phoneNumber: storedPhoneNumber
+				});
+				// const token = await createJwt({ phoneNumber: storedPhoneNumber });
 				try {
 					await db.createRaptor(platform?.env.DATABASE, { phoneNumber: storedPhoneNumber });
 				} catch (e) {
@@ -54,13 +54,13 @@ export async function POST({ request, cookies, platform }) {
 			if (storedPhoneNumber === testPhoneNumber) {
 				return approved();
 			}
-			// const r = await platform?.env.AUTH_SERVICE.verifyCode({
-			// 	phoneNumber: storedPhoneNumber,
-			// 	code
-			// });
-			// if (r.status === 'approved') {
-			// 	return approved();
-			// }
+			const r = await platform?.env.AUTH_SERVICE.verifyCode({
+				phoneNumber: storedPhoneNumber,
+				code
+			});
+			if (r.status === 'approved') {
+				return approved();
+			}
 		}
 		return json({ message: responses.CODE_INVALID });
 	}
