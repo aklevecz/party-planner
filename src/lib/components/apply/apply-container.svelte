@@ -9,17 +9,19 @@
 
 	function goToApplyForm() {
 		goto('/?view=apply-form');
-        setTimeout(() => {
-            generateScrollTo('apply-form');
-        },500)
+		setTimeout(() => {
+			generateScrollTo('apply-form');
+		}, 500);
 	}
 </script>
 
 {#if hasApplied && app.view === 'intro'}
 	<h3>You have already applied</h3>
-	<div>{applySvelte.state.name}</div>
-	<div>{applySvelte.state.email}</div>
-	<div>{applySvelte.state.message}</div>
+	<div>
+		<div>{applySvelte.state.name}</div>
+		<div>{applySvelte.state.email}</div>
+		<div style="margin-top:1rem;">{applySvelte.state.message}</div>
+	</div>
 	<button style="margin:2rem 0;" onclick={goToApplyForm}>Change Answers</button>
 {:else if !hasApplied && app.view === 'intro'}
 	<!-- <div>This will fittingly be a collective effort</div> -->
