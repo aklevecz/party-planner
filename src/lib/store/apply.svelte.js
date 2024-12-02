@@ -21,9 +21,10 @@ const api = (function () {
 			const data = await response.json();
 			return data;
 		},
-		/** @param {string} id */
-		getExistingRecords: async (id) => {
-			const response = await fetch(endpoints.apply + `/?id=${id}`, {
+		getExistingRecords: async () => {
+			const response = await fetch(endpoints.apply
+				//  + `/?id=${id}`
+				 , {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json'
@@ -60,9 +61,8 @@ const createApplyStore = () => {
 			await delay(2000)
 			fetching = false;
 		},
-		/** @param {string} existingRecordId */
-		getExistingRecord: async (existingRecordId) => {
-			const data = await api.getExistingRecords(existingRecordId);
+		getExistingRecord: async () => {
+			const data = await api.getExistingRecords();
 			if (data) {
 				const newState = { id: data.id, name: data.name, email: data.email, message: data.message };
 				apply = newState;

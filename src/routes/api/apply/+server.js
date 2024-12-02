@@ -2,13 +2,17 @@ import { createJwt, verifyAndDecodeJwt } from '$lib/auth.server';
 import { json } from '@sveltejs/kit';
 
 /** @type {import('./$types').RequestHandler} */
-export async function GET({ platform, url }) {
-	const token = url.searchParams.get('id');
-	if (!token) {
+export async function GET({cookies, platform, url }) {
+	// const token = url.searchParams.get('id');
+	// if (!token) {
+		// return json(null);
+	// }
+	const applyToken = cookies.get('applyId');
+	if (!applyToken) {
 		return json(null);
 	}
-	// const { id } = await verifyAndDecodeJwt(token);
-	let { id } = await platform?.env.AUTH_SERVICE.authorizeToken(token);
+	const { id } = await verifyAndDecodeJwt(applyToken);
+	// let { id } = await platform?.env.AUTH_SERVICE.authorizeToken(token);
 	const existingRecord = await platform?.env.DATABASE.prepare(
 		'SELECT * FROM party_planner_apply WHERE id = ?'
 	)

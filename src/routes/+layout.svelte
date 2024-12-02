@@ -11,7 +11,7 @@
 
 	onMount(() => {
 		if (data.applyId) {
-			applySvelte.getExistingRecord(data.applyId);
+			applySvelte.getExistingRecord();
 		}
 		authSvelte.init(data);
 	});
