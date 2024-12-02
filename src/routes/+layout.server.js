@@ -10,11 +10,15 @@ export async function load({ cookies, platform, url }) {
 	let user = { phoneNumber: '' };
 	if (token) {
 		// let decoded = await verifyAndDecodeJwt(token);
-        let decoded = await platform?.env.AUTH_SERVICE.authorizeToken(token);
-        if (decoded.phoneNumber) {
-            user = decoded;
-            authorized = true;
-        }
+		try {
+			let decoded = await platform?.env.AUTH_SERVICE.authorizeToken(token);
+			if (decoded.phoneNumber) {
+				user = decoded;
+				authorized = true;
+			}
+		} catch (e) {
+			cookies.delete('token', { path: '/' });
+		}
 	}
 	return { applyId, view, user, authorized };
 }
