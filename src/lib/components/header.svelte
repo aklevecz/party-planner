@@ -75,7 +75,7 @@
 	h1 {
 		font-size: 1.5rem;
 		margin: 0;
-		color: var(--orange);
+		color: white;
 	}
 
 	img {
@@ -96,7 +96,7 @@
 		display: block;
 		width: 24px;
 		height: 2px;
-		background: var(--orange);
+		background: white;
 		position: relative;
 		transition: background 0.2s ease-out;
 	}
@@ -107,7 +107,7 @@
 		position: absolute;
 		width: 100%;
 		height: 2px;
-		background: var(--orange);
+		background: white;
 		transition: all 0.2s ease-out;
 	}
 
@@ -186,7 +186,7 @@
 	.mobile-nav a,
 	.desktop-nav a {
 		color: var(--color-foreground);
-		color: var(--orange);
+		color: white;
 		text-decoration: none;
 		font-size: 1.2rem;
 		font-weight: 600;
