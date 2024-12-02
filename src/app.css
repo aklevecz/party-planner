@@ -1,7 +1,9 @@
 :root {
 	--red: #EB1C24;
 	--gold: #FDB243;
+	--orange: #ff9a25;
 	--black: #241E20;
+	--nav-green: #719373;
 	--color-background: darkslategrey;
 	--color-foreground: rgba(245, 245, 245, 0.683);
 	--color-interactive: rgb(68, 116, 116);
@@ -16,6 +18,7 @@
 
 html,
 body {
+	margin:0;
 	font-family: sans-serif;
 	background-color: var(--color-background);
 	color: var(--color-foreground);
@@ -33,7 +36,8 @@ textarea {
 }
 
 button {
-	color: var(--color-background);
+	color: var(--color-foreground);
+	color: #389c67;
 	border-radius: var(--pill-border-radius);
 	margin: auto;
 	padding: .5rem 1rem;

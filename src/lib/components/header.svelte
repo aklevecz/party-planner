@@ -35,7 +35,7 @@
 {/snippet}
 <div class="container">
 	<!-- <img src="/raptor-svg.svg" alt="raptor" /> -->
-	<h1>Faight Party</h1>
+	<h1>Raptor Faight</h1>
 	<nav class="desktop-nav" aria-hidden={isNavOpen}>
 		{@render navLinks()}
 	</nav>
@@ -69,10 +69,13 @@
 		gap: 0.5rem;
 		position: relative;
 		padding: 1rem;
+		background-color: var(--nav-green);
 	}
 
 	h1 {
+		font-size: 1.5rem;
 		margin: 0;
+		color: var(--orange);
 	}
 
 	img {
@@ -93,7 +96,7 @@
 		display: block;
 		width: 24px;
 		height: 2px;
-		background: white;
+		background: var(--orange);
 		position: relative;
 		transition: background 0.2s ease-out;
 	}
@@ -104,7 +107,7 @@
 		position: absolute;
 		width: 100%;
 		height: 2px;
-		background: white;
+		background: var(--orange);
 		transition: all 0.2s ease-out;
 	}
 
@@ -147,6 +150,7 @@
 		width: 170px;
 		height: 235px;
 		background: var(--color-interactive);
+		background: var(--nav-green);
 		padding: 0rem 20px;
 		box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
 		transition: transform 0.3s ease-out;
@@ -182,6 +186,7 @@
 	.mobile-nav a,
 	.desktop-nav a {
 		color: var(--color-foreground);
+		color: var(--orange);
 		text-decoration: none;
 		font-size: 1.2rem;
 		font-weight: 600;

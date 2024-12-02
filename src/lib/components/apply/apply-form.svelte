@@ -29,7 +29,7 @@
 	<input bind:value={name} type="text" placeholder="Name" />
 	<input bind:value={email} type="text" placeholder="Email" />
 	<textarea bind:value={message} placeholder="Stuff you would like to do"></textarea>
-	<button disabled={applySvelte.fetching || !isFilledOut} onclick={onApply}>{#if applySvelte.fetching}<RaptorAnimated />{:else}Apply{/if}</button>
+	<button disabled={applySvelte.fetching || !isFilledOut} onclick={onApply}>{#if applySvelte.fetching}<RaptorAnimated />{:else}Submit{/if}</button>
 </div>
 
 <style>

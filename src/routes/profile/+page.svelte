@@ -6,13 +6,14 @@
 	let { data } = $props();
 </script>
 
-<h1>Profile</h1>
+<h1 style="text-align: center;">Profile</h1>
 <div>
+	<div style="text-align: center;">To be implemented...</div>
 	{#if authSvelte.state.authorized}
 		<div>Phone: {authSvelte.state.user.phoneNumber}</div>
 		<button onclick={authSvelte.logout}>Logout</button>
 	{/if}
 	{#if !authSvelte.state.authorized}
-		<AuthFlow />
+		<!-- <AuthFlow /> -->
 	{/if}
 </div>

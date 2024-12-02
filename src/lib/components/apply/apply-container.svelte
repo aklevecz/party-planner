@@ -11,7 +11,7 @@
 		goto('/?view=apply-form');
         setTimeout(() => {
             generateScrollTo('apply-form');
-        },10)
+        },500)
 	}
 </script>
 
