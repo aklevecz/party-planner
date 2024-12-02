@@ -36,7 +36,7 @@
 <div class="container">
 	<!-- <img src="/raptor-svg.svg" alt="raptor" /> -->
 	<h1>Raptor Faight</h1>
-	<nav class="desktop-nav" aria-hidden={isNavOpen}>
+	<nav class="desktop-nav">
 		{@render navLinks()}
 	</nav>
 	<button class="nav-toggle" onclick={toggleNav} aria-label="Toggle navigation">
@@ -70,6 +70,7 @@
 		position: relative;
 		padding: 1rem;
 		background-color: var(--nav-green);
+		height:50px;
 	}
 
 	h1 {
@@ -158,7 +159,7 @@
 	}
 
 	.mobile-nav.open {
-		transform: translateX(-280px);
+		transform: translateX(-310px);
 	}
 
 	ul {
