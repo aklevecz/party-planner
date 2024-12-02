@@ -48,7 +48,7 @@ export async function POST({ cookies, platform, request }) {
 	await cookies.set('applyId', token, {
 		path: '/'
 	});
-	return json({ success: true, name, email, message });
+	return json({ success: true, name, email, message, id: checkRecord.id });
 }
 
 export async function DELETE({ cookies }) {

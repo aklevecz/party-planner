@@ -1,6 +1,7 @@
 <script>
 	import ApplyContainer from '$lib/components/apply/apply-container.svelte';
 	import app from '$lib/store/app.svelte.js';
+	import applySvelte from '$lib/store/apply.svelte.js';
 	let { data } = $props();
 
 	$effect(() => {
