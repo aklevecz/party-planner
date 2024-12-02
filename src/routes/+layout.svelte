@@ -35,7 +35,7 @@
 	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://faight.raptor.pizza" />
-	<meta property="og:image" content="https://faight.raptor.pizza/remi-raptor.png" />
+	<meta property="og:image" content="https://faight.raptor.pizza/og-raptor.png" />
 	<meta property="og:image:width" content="1080" />
 	<meta property="og:image:height" content="1080" />
 	<meta property="og:site_name" content="Raptor Party - Faight Collective" />
@@ -47,7 +47,7 @@
 		name="twitter:description"
 		content="Join the Raptor Party at Faight Collective - Experience the revolution in collective collaboration"
 	/>
-	<meta name="twitter:image" content="https://faight.raptor.pizza/remi-raptor.png" />
+	<meta name="twitter:image" content="https://faight.raptor.pizza/og-raptor.png" />
 
 	<!-- Additional Meta Tags -->
 	<meta name="theme-color" content="#2f4f4f" />
