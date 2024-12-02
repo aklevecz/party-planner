@@ -55,21 +55,22 @@
 	<link rel="canonical" href="https://faight.raptor.pizza" />
 </svelte:head>
 <Header />
-<div style="min-height:calc(100vh - 100px);">
+<!-- <div style="min-height:calc(100vh - 100px);"> -->
 	{@render children()}
-</div>
-<div style="background-color:var(--nav-green);height:50px;display:flex;gap:10px;align-items:center;justify-content:center;padding:5px;">
+<!-- </div> -->
+
+<!-- <div style="background-color:var(--nav-green);height:50px;display:flex;gap:10px;align-items:center;justify-content:center;padding:5px;">
 	<img src="/raptor-svg.svg" alt="raptor" class="raptor-footer"/>
 	<img src="/raptor-svg.svg" alt="raptor" class="raptor-footer"/>
 	<img src="/raptor-svg.svg" alt="raptor" class="raptor-footer"/>
 	<img src="/raptor-svg.svg" alt="raptor" class="raptor-footer"/>
 	<img src="/raptor-svg.svg" alt="raptor" class="raptor-footer"/>
 	<img src="/raptor-svg.svg" alt="raptor" class="raptor-footer"/>
-</div>
+</div> -->
 <!-- <div>Brought to you by Raptor enterprises</div> -->
-<style>
+<!-- <style>
 	.raptor-footer {
 		width: 40px;
 		height: 40px;
 	}
-</style>
+</style> -->
