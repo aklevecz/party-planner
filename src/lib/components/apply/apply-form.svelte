@@ -22,7 +22,7 @@
 	let isFilledOut = $derived(name && email && message);
 </script>
 
-<div class="apply-form">
+<div class="apply-form" id="apply-form">
     <div style="font-weight:bold;">Please provide your name, email, and a message about what you would like to do for the event</div>
 	<!-- <div>Some of the pillars of the event include: art, music, entry</div> -->
 	<!-- <div>It can be specific or general, and even if there isn't a particularly good fit for what you would like to do, you can still help out in other ways</div> -->

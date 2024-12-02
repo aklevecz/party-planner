@@ -2,12 +2,16 @@
 	import { goto } from '$app/navigation';
 	import app from '$lib/store/app.svelte';
 	import applySvelte from '$lib/store/apply.svelte';
+	import { generateScrollTo } from '$lib/utils';
 	import ApplyForm from './apply-form.svelte';
 
 	let hasApplied = $derived(applySvelte.state.id);
 
 	function goToApplyForm() {
 		goto('/?view=apply-form');
+        setTimeout(() => {
+            generateScrollTo('apply-form');
+        },10)
 	}
 </script>
 
@@ -18,7 +22,7 @@
 	<div>{applySvelte.state.message}</div>
 	<button onclick={goToApplyForm}>Change Answers</button>
 {:else if !hasApplied && app.view === 'intro'}
-	<div>This will fittingly be a collective effort</div>
+	<!-- <div>This will fittingly be a collective effort</div> -->
 	<div>Interested in helping out?</div>
 	<div>Apply to be part of the party planning</div>
 	<!-- <div>Firstly we would like to find people interested in being</div>

@@ -9,13 +9,20 @@
 </script>
 
 <div class="container">
-	<div style="font-size:1.5rem;">Let's throw a party at The Faight Collective</div>
-	<div>This site will continue to evolve and be apart of the party</div>
+	<div style="font-weight: 600; font-size: 1.5rem; text-align: center;">
+		Let's throw a party at The Faight Collective
+	</div>
+	<div style="text-align: center; padding: 0 40px;">
+		This site will continue to evolve and be apart of the party
+	</div>
 	<div
-		style="background-color: var(--color-interactive); height:10px; width:100%;margin:1rem 0;"
+		style="background-color: var(--color-interactive); height:4px; width:100%;margin:1rem 0;"
 	></div>
-		<img src="/raptor-svg.svg" alt="raptor" style="width:200px;height:200px;margin:0rem auto 1rem;display:block;"/>
-
+	<img
+		src="/raptor-svg.svg"
+		alt="raptor"
+		style="width:170px;height:170px;margin:0rem auto 1rem;display:block;"
+	/>
 	<ApplyContainer />
 	<!-- {#if authSvelte.state.authorized}<VoteContainer />{/if} -->
 	<!-- <AuthFlow /> -->
@@ -30,6 +37,6 @@
 		gap: 0.5rem;
 		margin: auto;
 		max-width: 500px;
-		/* align-items: center; */
+		align-items: center;
 	}
 </style>

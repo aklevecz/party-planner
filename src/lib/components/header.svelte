@@ -145,7 +145,7 @@
 		bottom: 0;
 		right: -380px;
 		width: 170px;
-		height: 257px;
+		height: 235px;
 		background: var(--color-interactive);
 		padding: 0rem 20px;
 		box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
@@ -163,7 +163,7 @@
 
 	.mobile-nav ul {
 		padding: 0;
-		margin: 2rem 0;
+		margin: 0;
 	}
 
 	.mobile-nav li {

@@ -1,3 +1,5 @@
+import { get } from 'svelte/store';
+
 const noCacheHeaders = {
 	'Content-Type': 'application/json',
 	'Cache-Control': 'no-cache, no-store, must-revalidate',
@@ -34,7 +36,25 @@ const api = (function () {
 				headers: noCacheHeaders
 			});
 			const data = await response.json();
-            console.log(`getAllVotes: ${JSON.stringify(data)}`)
+			console.log(`getAllVotes: ${JSON.stringify(data)}`);
+			return data;
+		},
+		/** @param {string} id */
+		getOptions: async (id) => {
+			const response = await fetch(`/api/vote?id=${id}&type=options`, {
+				method: 'GET',
+				headers: noCacheHeaders
+			});
+			const data = await response.json();
+			return data;
+		},
+		/** @param {string} id */
+		getVotesForId: async (id) => {
+			const response = await fetch(`/api/vote?id=${id}&type=votes`, {
+				method: 'GET',
+				headers: noCacheHeaders
+			});
+			const data = await response.json();
 			return data;
 		}
 	};
@@ -50,6 +70,12 @@ const createVoteStore = (id, options) => {
 	return {
 		get state() {
 			return vote;
+		},
+		/** @param {string} id */
+		initDynamicVotes: async (id) => {
+			const options = await api.getOptions(id);
+			const votes = await api.getVotesForId(id);
+			vote = { id, options, votes };
 		},
 		/** @param {string} option */
 		vote: async (option) => {

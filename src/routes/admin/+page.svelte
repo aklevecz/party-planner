@@ -6,6 +6,9 @@
 
 	let filteredRecords = $state(records);
 
+	/** @type {string} */
+	let view = $state('applications');
+
 	$effect(() => {
 		filteredRecords = records.filter(
 			(record) =>
@@ -26,6 +29,10 @@
 	}
 </script>
 
+<nav>
+	<button onclick={() => (view = 'applications')}>apply</button>
+	<button onclick={() => (view = 'votes')}>votes</button>
+</nav>
 <div class="container">
 	<h1>Admin Dashboard</h1>
 
@@ -37,48 +44,62 @@
 			class="search-input"
 		/>
 	</div>
-	{#if data.votes}<div>
-			{#each data.votes as vote}
-				<div>
-					{vote}
-				</div>
-			{/each}
+	{#if data.votes && view === 'votes'}
+		<div class="table-container">
+			<table>
+				<thead>
+					<tr>
+						<th>person</th>
+						<th>vote</th>
+					</tr>
+				</thead>
+				<tbody>
+					{#each data.votes as vote}
+						<tr>
+							<td>{vote.voter}</td>
+							<td>{vote.vote}</td>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
 		</div>
 	{/if}
-	<div class="table-container">
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Message</th>
-					<th>Feedback</th>
-					<th>Created At</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each filteredRecords as record (record.id)}
+	{#if view === 'applications'}
+		<div class="table-container">
+			<table>
+				<thead>
 					<tr>
-						<td>{record.id}</td>
-						<td>{record.name}</td>
-						<td>{record.email}</td>
-						<td>{record.message}</td>
-						<td>{record.feedback || '-'}</td>
-						<td>{formatDate(record.created_at)}</td>
-						<td>
-							<button onclick={() => handleDelete(record.id)} class="delete-btn"> Delete </button>
-						</td>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Message</th>
+						<th>Feedback</th>
+						<th>Created At</th>
+						<th>Actions</th>
 					</tr>
-				{:else}
-					<tr>
-						<td colspan="7" class="empty-message">No records found</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
-	</div>
+				</thead>
+				<tbody>
+					{#each filteredRecords as record (record.id)}
+						<tr>
+							<td>{record.id}</td>
+							<td>{record.name}</td>
+							<td>{record.email}</td>
+							<td>{record.message}</td>
+							<td>{record.feedback || '-'}</td>
+							<td>{formatDate(record.created_at)}</td>
+							<td>
+								<button onclick={() => handleDelete(record.id)} class="delete-btn"> Delete </button>
+							</td>
+						</tr>
+					{:else}
+						<tr>
+							<td colspan="7" class="empty-message">No records found</td>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
+		</div>
+	{/if}
 </div>
 
 <style>
