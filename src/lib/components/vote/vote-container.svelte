@@ -1,18 +1,18 @@
 <script>
-	import { dateVote } from '$lib/store/vote.svelte';
+	import { monthVote } from '$lib/store/vote.svelte';
 	import { onMount } from 'svelte';
 
 	let selectedOption = $state('');
 	let hasVoted = $state(false);
 
 	onMount(() => {
-		dateVote.getUserVote().then((vote) => {
+		monthVote.getUserVote().then((vote) => {
 			if (vote) {
 				selectedOption = vote;
 				hasVoted = true;
 			}
 		});
-		dateVote.getAllVotes();
+		monthVote.getAllVotes();
 	});
 
 	/** @param {string} option */
@@ -20,13 +20,13 @@
 		// if (!hasVoted) {
 		selectedOption = option;
 		hasVoted = true;
-		dateVote.vote(option);
+		monthVote.vote(option);
 		// }
 	}
 
 	/** @param {string} option */
 	function getVoteCount(option) {
-		return dateVote.state.votes.reduce((acc, vote) => {
+		return monthVote.state.votes.reduce((acc, vote) => {
 			if (vote === option) {
 				return acc + 1;
 			}
@@ -36,17 +36,17 @@
 
 	/** @param {string} option */
 	function getPercentage(option) {
-		const total = dateVote.state.votes.length;
+		const total = monthVote.state.votes.length;
 		const votes = getVoteCount(option);
 		return total === 0 ? 0 : Math.round((votes / total) * 100);
 	}
 </script>
 
 <div class="vote-container">
-	<h3>Vote for the {dateVote.state.id}</h3>
+	<h3>Vote for the {monthVote.state.id}</h3>
 
 	<div class="options-list">
-		{#each Object.keys(dateVote.state.options) as option}
+		{#each Object.keys(monthVote.state.options) as option}
 			<button
 				class="vote-option {selectedOption === option ? 'selected' : ''}"
 				onclick={() => handleVote(option)}
@@ -86,6 +86,7 @@
 		margin: 0 0 20px 0;
 		font-size: 1.5rem;
 		text-align: center;
+		color: black;
 	}
 
 	.options-list {
@@ -133,6 +134,7 @@
 
 	.option-text {
 		font-size: 1rem;
+		color: black;
 	}
 
 	.vote-count {

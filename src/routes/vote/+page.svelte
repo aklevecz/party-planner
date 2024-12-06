@@ -9,9 +9,15 @@
 
 <div class="container">
 	<h1>Vote</h1>
-	<div style="text-align: center;">Things will be voted on here</div>
+	<!-- <div class="textcenter">Things will be voted on here</div> -->
 	{#if authSvelte.state.authorized}<VoteContainer />{/if}
-	<!-- {#if !authSvelte.state.authorized}<AuthFlow />{/if} -->
+
+	{#if !authSvelte.state.authorized}
+		<div class="autoblock">
+			<div class="textcenter">Sign in to vote</div>
+			<AuthFlow />
+		</div>
+	{/if}
 </div>
 
 <style>

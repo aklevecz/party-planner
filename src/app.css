@@ -83,3 +83,11 @@ input::placeholder,
 textarea::placeholder {
 	color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
 }
+
+.autoblock {
+    margin:auto;
+    display: block;
+}
+.textcenter {
+    text-align: center;
+}

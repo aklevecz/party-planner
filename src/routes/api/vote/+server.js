@@ -25,6 +25,12 @@ const addNoCacheHeaders = (response) => {
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ cookies, platform, url }) {
 	const type = url.searchParams.get('type');
+	const voteId = url.searchParams.get('id');
+
+	if (!type || !voteId) {
+		return new Response(null, { status: 401 });
+	}
+
 	if (type === 'user') {
 		const token = cookies.get('token');
 		if (!token) {
@@ -36,14 +42,14 @@ export async function GET({ cookies, platform, url }) {
 			return new Response(null, { status: 401 });
 		}
 		const vote = await voteKv(platform).getUserVote({
-			voteId: 'date',
+			voteId,
 			userId: decoded.phoneNumber
 		});
 		return addNoCacheHeaders(json(vote))
 	}
 
     if (type === 'all') {
-        const votes = await voteKv(platform).getAllVotes({voteId: 'date'});
+        const votes = await voteKv(platform).getAllVotes({voteId});
         return addNoCacheHeaders(json(votes.map(v => v.vote)))
     }
 
@@ -71,7 +77,7 @@ export async function POST({ cookies, platform, request }) {
 	// 	const vote = await platform?.env.PARTY_KV.get(allVotes.keys[i].name);
 	// 	votes.push(vote);
 	// }
-	let votes = await kv.getAllVotes({voteId: 'date'});
+	let votes = await kv.getAllVotes({voteId: id});
 	console.log(`all votes: ${JSON.stringify(votes)}`)
 	const usersVote = votes.find(v => v.voter === decoded.phoneNumber);
 	if (!usersVote) {

@@ -1,5 +1,3 @@
-import { get } from 'svelte/store';
-
 const noCacheHeaders = {
 	'Content-Type': 'application/json',
 	'Cache-Control': 'no-cache, no-store, must-revalidate',
@@ -22,16 +20,18 @@ const api = (function () {
 			const data = await response.json();
 			return data;
 		},
-		getUserVote: async () => {
-			const response = await fetch('/api/vote?type=user', {
+		/** @param {string} id */
+		getUserVote: async (id) => {
+			const response = await fetch(`/api/vote?type=user&id=${id}`, {
 				method: 'GET',
 				headers: noCacheHeaders
 			});
 			const data = await response.json();
 			return data;
 		},
-		getAllVotes: async () => {
-			const response = await fetch('/api/vote?type=all', {
+		/** @param {string} id */
+		getAllVotes: async (id) => {
+			const response = await fetch(`/api/vote?type=all&id=${id}`, {
 				method: 'GET',
 				headers: noCacheHeaders
 			});
@@ -85,17 +85,18 @@ const createVoteStore = (id, options) => {
 			// vote.votes = data.votes;
 		},
 		getUserVote: async () => {
-			return await api.getUserVote();
+			return await api.getUserVote(id);
 		},
 		getAllVotes: async () => {
-			const allVotes = await api.getAllVotes();
+			const allVotes = await api.getAllVotes(id);
 			vote.votes = allVotes;
 		}
 	};
 };
 
-export const dateVote = createVoteStore('date', {
-	'2025-01-01': 0,
-	'2025-01-13': 0,
-	'2025-01-26': 0
+export const monthVote = createVoteStore('month', {
+	'January': 0,
+	'February': 0,
+	'March': 0,
+	'April': 0,
 });
