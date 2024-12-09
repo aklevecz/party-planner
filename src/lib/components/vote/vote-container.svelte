@@ -54,7 +54,7 @@
 			<button
 				class="vote-option {selectedOption === option ? 'selected' : ''}"
 				onclick={() => handleVote(option)}
-				disabled={!isAuthed || (hasVoted && selectedOption !== option)}
+				disabled={!isAuthed || selectedOption !== option}
 			>
 				<div class="option-content">
 					<span class="option-text">{option}</span>
