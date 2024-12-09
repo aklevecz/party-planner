@@ -1,9 +1,12 @@
 <script>
+	import authSvelte from '$lib/store/auth.svelte';
 	import { monthVote } from '$lib/store/vote.svelte';
 	import { onMount } from 'svelte';
 
 	let selectedOption = $state('');
 	let hasVoted = $state(false);
+
+	let isAuthed = $derived(authSvelte.state.authorized)
 
 	onMount(() => {
 		monthVote.getUserVote().then((vote) => {
@@ -42,7 +45,7 @@
 	}
 </script>
 
-<div class="vote-container">
+<div class:disabled={!isAuthed} class="vote-container">
 	<h3>Vote for the {monthVote.state.id}</h3>
 
 	<div class="options-list">
@@ -50,7 +53,7 @@
 			<button
 				class="vote-option {selectedOption === option ? 'selected' : ''}"
 				onclick={() => handleVote(option)}
-				disabled={false && hasVoted && selectedOption !== option}
+				disabled={!isAuthed || (hasVoted && selectedOption !== option)}
 			>
 				<div class="option-content">
 					<span class="option-text">{option}</span>
@@ -73,6 +76,9 @@
 </div>
 
 <style>
+	.disabled {
+		opacity: .5;
+	}
 	.vote-container {
 		max-width: 500px;
 		margin: 20px auto;

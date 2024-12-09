@@ -28,17 +28,20 @@ export async function GET({ cookies, platform, url }) {
 	const voteId = url.searchParams.get('id');
 
 	if (!type || !voteId) {
+		console.log('vote:get no type or id');
 		return new Response(null, { status: 401 });
 	}
 
 	if (type === 'user') {
 		const token = cookies.get('token');
 		if (!token) {
+			console.log('vote:get no token');
 			return new Response(null, { status: 401 });
 		}
 		// const decoded = await verifyAndDecodeJwt(token);
 		const decoded = await platform?.env.AUTH_SERVICE.authorizeToken(token);
 		if (!decoded.phoneNumber) {
+			console.log('vote:get no phone number');
 			return new Response(null, { status: 401 });
 		}
 		const vote = await voteKv(platform).getUserVote({
@@ -50,9 +53,11 @@ export async function GET({ cookies, platform, url }) {
 
     if (type === 'all') {
         const votes = await voteKv(platform).getAllVotes({voteId});
+		console.log(`getAllVotes: ${JSON.stringify(votes)}`);
         return addNoCacheHeaders(json(votes.map(v => v.vote)))
     }
 
+	console.log('vote:get unknown error');
     return new Response(null, { status: 401 });
 }
 
@@ -70,6 +75,7 @@ export async function POST({ cookies, platform, request }) {
 	let kv = voteKv(platform);
 	// let key = `${id}:vote:${decoded.phoneNumber}`;
 	// await platform?.env.PARTY_KV.put(key, option);
+	console.log(`voteId: ${id}, userId: ${decoded.phoneNumber}, option: ${option}`)
 	await kv.vote({ voteId: id, userId: decoded.phoneNumber, option });
 	// let votes = [];
 	// const allVotes = await platform?.env.PARTY_KV.list({ prefix: 'date:vote:' });

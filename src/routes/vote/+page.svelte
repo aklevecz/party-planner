@@ -9,15 +9,17 @@
 
 <div class="container">
 	<h1>Vote</h1>
-	<!-- <div class="textcenter">Things will be voted on here</div> -->
-	{#if authSvelte.state.authorized}<VoteContainer />{/if}
-
 	{#if !authSvelte.state.authorized}
 		<div class="autoblock">
-			<div class="textcenter">Sign in to vote</div>
+			<div style="display:flex; flex-direction:column;  align-items:center;justify-content:center;gap:1rem">
+				<div class="textcenter">Sign in to vote</div>
+				<img style="width:70px;height:70px;" src="/raptor-svg.svg" alt="raptor" />
+			</div>
 			<AuthFlow />
 		</div>
 	{/if}
+	<!-- <div class="textcenter">Things will be voted on here</div> -->
+	<VoteContainer />
 </div>
 
 <style>

@@ -89,6 +89,7 @@ const createVoteStore = (id, options) => {
 		},
 		getAllVotes: async () => {
 			const allVotes = await api.getAllVotes(id);
+			console.log(`allVotes: ${JSON.stringify(allVotes)}`);
 			vote.votes = allVotes;
 		}
 	};
