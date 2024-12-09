@@ -10,6 +10,7 @@
 	onMount(() => {
 		dayOfTheWeekVote.getUserVote().then((vote) => {
 			if (vote) {
+				console.log(`selected vote: ${vote}`)
 				selectedOption = vote;
 				hasVoted = true;
 			}
@@ -52,7 +53,7 @@
 			<button
 				class="vote-option {selectedOption === option ? 'selected' : ''}"
 				onclick={() => handleVote(option)}
-				disabled={!authSvelte.state.authorized || (selectedOption !== option)}
+				disabled={!authSvelte.state.authorized || (selectedOption === option)}
 			>
 				<div class="option-content">
 					<span class="option-text">{option}</span>
