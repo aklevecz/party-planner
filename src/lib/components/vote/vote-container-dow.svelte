@@ -1,6 +1,6 @@
 <script>
 	import authSvelte from '$lib/store/auth.svelte';
-	import { monthVote } from '$lib/store/vote.svelte';
+	import { dayOfTheWeekVote } from '$lib/store/vote.svelte';
 	import { camelToPhrase } from '$lib/utils';
 	import { onMount } from 'svelte';
 
@@ -10,13 +10,13 @@
 	let isAuthed = $derived(authSvelte.state.authorized)
 
 	onMount(() => {
-		monthVote.getUserVote().then((vote) => {
+		dayOfTheWeekVote.getUserVote().then((vote) => {
 			if (vote) {
 				selectedOption = vote;
 				hasVoted = true;
 			}
 		});
-		monthVote.getAllVotes();
+		dayOfTheWeekVote.getAllVotes();
 	});
 
 	/** @param {string} option */
@@ -24,13 +24,13 @@
 		// if (!hasVoted) {
 		selectedOption = option;
 		hasVoted = true;
-		monthVote.vote(option);
+		dayOfTheWeekVote.vote(option);
 		// }
 	}
 
 	/** @param {string} option */
 	function getVoteCount(option) {
-		return monthVote.state.votes.reduce((acc, vote) => {
+		return dayOfTheWeekVote.state.votes.reduce((acc, vote) => {
 			if (vote === option) {
 				return acc + 1;
 			}
@@ -40,17 +40,17 @@
 
 	/** @param {string} option */
 	function getPercentage(option) {
-		const total = monthVote.state.votes.length;
+		const total = dayOfTheWeekVote.state.votes.length;
 		const votes = getVoteCount(option);
 		return total === 0 ? 0 : Math.round((votes / total) * 100);
 	}
 </script>
 
 <div class:disabled={!isAuthed} class="vote-container">
-	<h3>Vote for the {camelToPhrase(monthVote.state.id)}</h3>
+	<h3>Vote for the {camelToPhrase(dayOfTheWeekVote.state.id)}</h3>
 
 	<div class="options-list">
-		{#each Object.keys(monthVote.state.options) as option}
+		{#each Object.keys(dayOfTheWeekVote.state.options) as option}
 			<button
 				class="vote-option {selectedOption === option ? 'selected' : ''}"
 				onclick={() => handleVote(option)}

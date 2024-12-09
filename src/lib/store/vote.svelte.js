@@ -101,3 +101,9 @@ export const monthVote = createVoteStore('month', {
 	'March': 0,
 	'April': 0,
 });
+
+export const dayOfTheWeekVote = createVoteStore('dayOfTheWeek', {
+	'weekday': 0,
+	'weekend': 0,
+	'not important to me': 0
+});
