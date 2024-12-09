@@ -7,8 +7,6 @@
 	let selectedOption = $state('');
 	let hasVoted = $state(false);
 
-	let isAuthed = $derived(authSvelte.state.authorized)
-
 	onMount(() => {
 		monthVote.getUserVote().then((vote) => {
 			if (vote) {
@@ -46,7 +44,7 @@
 	}
 </script>
 
-<div class:disabled={!isAuthed} class="vote-container">
+<div class:disabled={!authSvelte.state.authorized} class="vote-container">
 	<h3>Vote for the {camelToPhrase(monthVote.state.id)}</h3>
 
 	<div class="options-list">
@@ -54,7 +52,7 @@
 			<button
 				class="vote-option {selectedOption === option ? 'selected' : ''}"
 				onclick={() => handleVote(option)}
-				disabled={!isAuthed || selectedOption !== option}
+				disabled={!authSvelte.state.authorized || selectedOption !== option}
 			>
 				<div class="option-content">
 					<span class="option-text">{option}</span>
