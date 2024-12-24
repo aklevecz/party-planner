@@ -1,7 +1,8 @@
 <script>
 	import AuthFlow from '$lib/components/auth/auth-flow.svelte';
-	import VoteContainerDow from '$lib/components/vote/vote-container-dow.svelte';
-	import VoteContainer from '$lib/components/vote/vote-container.svelte';
+	import VoteContainerMeetingone from '$lib/components/vote/vote-container-meetingone.svelte';
+	// import VoteContainerDow from '$lib/components/vote/vote-container-dow.svelte';
+	// import VoteContainer from '$lib/components/vote/vote-container.svelte';
 	import authSvelte from '$lib/store/auth.svelte';
 
 	/** @type {{ data: import('./$types').PageData }} */
@@ -22,8 +23,9 @@
 		</div>
 	{/if}
 	<!-- <div class="textcenter">Things will be voted on here</div> -->
-	<VoteContainer />
-	<VoteContainerDow/>
+	<!-- <VoteContainer /> -->
+	<!-- <VoteContainerDow/> -->
+	<VoteContainerMeetingone />
 </div>
 
 <style>

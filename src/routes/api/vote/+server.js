@@ -62,7 +62,7 @@ export async function GET({ cookies, platform, url }) {
 }
 
 export async function POST({ cookies, platform, request }) {
-	const { id, option } = await request.json();
+	const { id, option, options } = await request.json();
 	const token = cookies.get('token');
 	if (!token) {
 		return new Response(null, { status: 401 });
@@ -76,7 +76,7 @@ export async function POST({ cookies, platform, request }) {
 	// let key = `${id}:vote:${decoded.phoneNumber}`;
 	// await platform?.env.PARTY_KV.put(key, option);
 	console.log(`voteId: ${id}, userId: ${decoded.phoneNumber}, option: ${option}`)
-	await kv.vote({ voteId: id, userId: decoded.phoneNumber, option });
+	await kv.vote({ voteId: id, userId: decoded.phoneNumber, option, options });
 	// let votes = [];
 	// const allVotes = await platform?.env.PARTY_KV.list({ prefix: 'date:vote:' });
 	// for (let i = 0; i < allVotes.keys.length; i++) {

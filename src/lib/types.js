@@ -25,3 +25,8 @@
  * @property {User} user
  * @property {FlowState} flow
  */
+
+/**
+ * @typedef {Object} Options
+ *  @property {boolean} multipleVotes
+ */

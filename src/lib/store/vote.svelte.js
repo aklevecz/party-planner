@@ -7,14 +7,15 @@ const noCacheHeaders = {
 
 const api = (function () {
 	return {
-		/** @param {string} id @param {string} option */
-		vote: async (id, option) => {
+		/** @param {string} id @param {string} option @param {Options} options */
+		vote: async (id, option, options) => {
 			const response = await fetch('/api/vote', {
 				method: 'POST',
 				headers: noCacheHeaders,
 				body: JSON.stringify({
 					id,
-					option
+					option,
+					options
 				})
 			});
 			const data = await response.json();
@@ -59,13 +60,14 @@ const api = (function () {
 		}
 	};
 })();
-
+// OPTIONS ARE A BIT CONFUSING
 /**
  * @param {string} id
- * @param {Record<string, number>} options
+ * @param {Record<string, number>} voteOptions
+ * @param {Options} options
  */
-const createVoteStore = (id, options) => {
-	let vote = $state({ id, options, votes: [] });
+const createVoteStore = (id, voteOptions, options) => {
+	let vote = $state({ id, options: voteOptions, votes: [] });
 
 	return {
 		get state() {
@@ -79,7 +81,7 @@ const createVoteStore = (id, options) => {
 		},
 		/** @param {string} option */
 		vote: async (option) => {
-			const allVotes = await api.vote(id, option);
+			const allVotes = await api.vote(id, option, options);
 			// const allVotes = await api.getAllVotes();
 			vote.votes = allVotes.votes;
 			// vote.votes = data.votes;
@@ -90,20 +92,54 @@ const createVoteStore = (id, options) => {
 		getAllVotes: async () => {
 			const allVotes = await api.getAllVotes(id);
 			console.log(`allVotes: ${JSON.stringify(allVotes)}`);
-			vote.votes = allVotes;
+			if (options.multipleVotes) {
+				let parsedVotes = allVotes.map((/** @type {string} */ vote) => {
+					return JSON.parse(vote);
+				});
+				vote.votes = parsedVotes;
+			} else {
+				vote.votes = allVotes;
+			}
+			console.log(vote.votes)
 		}
 	};
 };
 
-export const monthVote = createVoteStore('month', {
-	'January': 0,
-	'February': 0,
-	'March': 0,
-	'April': 0,
-});
+export const monthVote = createVoteStore(
+	'month',
+	{
+		January: 0,
+		February: 0,
+		March: 0,
+		April: 0
+	},
+	{
+		multipleVotes: false
+	}
+);
 
-export const dayOfTheWeekVote = createVoteStore('dayOfTheWeek', {
-	'weekday': 0,
-	'weekend': 0,
-	'not important to me': 0
-});
+export const dayOfTheWeekVote = createVoteStore(
+	'dayOfTheWeek',
+	{
+		weekday: 0,
+		weekend: 0,
+		'not important to me': 0
+	},
+	{
+		multipleVotes: false
+	}
+);
+
+export const meetingOneVote = createVoteStore(
+	'meetOneVote',
+	{
+		January_6_Monday: 0,
+		January_7_Tuesday: 0,
+		January_8_Wednesday: 0,
+		January_9_Thursday: 0,
+		January_11_Friday: 0
+	},
+	{
+		multipleVotes: true
+	}
+);
