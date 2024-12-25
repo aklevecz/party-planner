@@ -48,7 +48,8 @@ export async function GET({ cookies, platform, url }) {
 			voteId,
 			userId: decoded.phoneNumber
 		});
-		return addNoCacheHeaders(json(vote))
+		console.log(`getUserVote: ${JSON.stringify(vote)}`);
+		return addNoCacheHeaders(json(vote.vote))
 	}
 
     if (type === 'all') {

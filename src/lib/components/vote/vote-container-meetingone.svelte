@@ -4,14 +4,16 @@
 	import { camelToPhrase } from '$lib/utils';
 	import { onMount } from 'svelte';
 
-	let selectedOption = $state('');
+	/** @type {string[]} */
+	let selectedOptions = $state([]);
 	let hasVoted = $state(false);
 
 	onMount(() => {
 		meetingOneVote.getUserVote().then((vote) => {
+			console.log(`user votes: ${JSON.stringify(vote)}`);
 			if (vote) {
-				console.log(`selected vote: ${vote}`)
-				selectedOption = vote;
+				console.log(`selected vote: ${vote}`);
+				selectedOptions = vote;
 				hasVoted = true;
 			}
 		});
@@ -19,11 +21,16 @@
 	});
 
 	/** @param {string} option */
-	function handleVote(option) {
+	async function handleVote(option) {
 		// if (!hasVoted) {
-		selectedOption = option;
+		// selectedOptions = option;
 		hasVoted = true;
-		meetingOneVote.vote(option);
+		await meetingOneVote.vote(option);
+		meetingOneVote.getUserVote().then((vote) => {
+			if (vote) {
+				selectedOptions = vote;
+			}
+		});
 		// }
 	}
 
@@ -43,6 +50,12 @@
 		const votes = getVoteCount(option);
 		return total === 0 ? 0 : Math.round((votes / total) * 100);
 	}
+
+	/** @param {string} option */
+	function isSelected(option) {
+		console.log(`option: ${option}, selected: ${JSON.stringify(selectedOptions)}`);
+		return selectedOptions.includes(option);
+	}
 </script>
 
 <div class:disabled={!authSvelte.state.authorized} class="vote-container">
@@ -51,17 +64,22 @@
 	<div class="options-list">
 		{#each Object.keys(meetingOneVote.state.options) as option}
 			<button
-				class="vote-option {selectedOption === option ? 'selected' : ''}"
+				class="vote-option {isSelected(option) ? 'selected' : ''}"
 				onclick={() => handleVote(option)}
 				disabled={!authSvelte.state.authorized}
 			>
 				<div class="option-content">
-					<span class="option-text">{option.replace(/_/g, ' ')}</span>
-						<span class="vote-count">
-							{getVoteCount(option)} votes ({getPercentage(option)}%)
-						</span>
+					<div class="option-left">
+						{#if isSelected(option)}
+							<span class="checkmark">✓</span>
+						{/if}
+						<span class="option-text">{option.replace(/_/g, ' ')}</span>
+					</div>
+					<span class="vote-count">
+						{getVoteCount(option)} votes ({getPercentage(option)}%)
+					</span>
 				</div>
-					<div class="progress-bar" style="width: {getPercentage(option)}%"></div>
+				<div class="progress-bar" style="width: {getPercentage(option)}%"></div>
 			</button>
 		{/each}
 	</div>
@@ -73,7 +91,7 @@
 
 <style>
 	.disabled {
-		opacity: .5;
+		opacity: 0.5;
 	}
 	.vote-container {
 		max-width: 500px;
@@ -117,12 +135,26 @@
 
 	.vote-option.selected {
 		border-color: #4a90e2;
-		background: #f0f7ff;
+		/* border-color: #56d569; */
+		/* background: #f0f7ff; */
+		/* background: #56d569; */
 	}
 
 	.vote-option:disabled {
 		cursor: default;
 		opacity: 0.7;
+	}
+
+	.option-left {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.checkmark {
+		color: #4a90e2;
+		font-weight: bold;
+		font-size: 1.2rem;
 	}
 
 	.option-content {
@@ -132,9 +164,17 @@
 		justify-content: space-between;
 		align-items: center;
 		gap: 10px;
+		position: relative;
+		z-index: 2;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 10px;
+		width: 100%;
 	}
 
 	.option-text {
+		flex: 1;
 		font-size: 1rem;
 		color: black;
 	}

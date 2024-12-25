@@ -28,6 +28,7 @@ const api = (function () {
 				headers: noCacheHeaders
 			});
 			const data = await response.json();
+			console.log(`getUserVote: ${JSON.stringify(data)}`);
 			return data;
 		},
 		/** @param {string} id */

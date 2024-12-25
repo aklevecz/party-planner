@@ -55,16 +55,16 @@ const voteDB = (platform) => {
 		},
 		/** @param {{voteId:string}} props */
 		getAllVotes: async ({ voteId }) => {
-			console.log(`getting all votes db`)
+			console.log(`getting all votes db`);
 			/** @type {{voter: string, vote: string}[]} */
 			let votes = [];
-			const {results:allVotes} = await platform?.env.DATABASE.prepare(
+			const { results: allVotes } = await platform?.env.DATABASE.prepare(
 				`SELECT voter_id, vote FROM votes WHERE vote_id = ?`
 			)
 				.bind(voteId)
 				.all();
-				console.log(allVotes)
-		return allVotes
+			console.log(allVotes);
+			return allVotes;
 		}
 	};
 };
