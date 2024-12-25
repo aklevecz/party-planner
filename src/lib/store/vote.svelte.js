@@ -68,6 +68,7 @@ const api = (function () {
  * @param {Options} options
  */
 const createVoteStore = (id, voteOptions, options) => {
+	/** @type {{id:string, options:Record<string, number>, votes:string[]}} */
 	let vote = $state({ id, options: voteOptions, votes: [] });
 
 	return {

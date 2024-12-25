@@ -53,7 +53,6 @@
 
 	/** @param {string} option */
 	function isSelected(option) {
-		console.log(`option: ${option}, selected: ${JSON.stringify(selectedOptions)}`);
 		return selectedOptions.includes(option);
 	}
 </script>

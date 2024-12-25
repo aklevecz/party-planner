@@ -1,5 +1,5 @@
 import { verifyAndDecodeJwt } from '$lib/auth.server';
-import voteKv from '$lib/vote.server';
+import voteDB from '$lib/vote.server';
 import { json } from '@sveltejs/kit';
 
 /**
@@ -44,17 +44,17 @@ export async function GET({ cookies, platform, url }) {
 			console.log('vote:get no phone number');
 			return new Response(null, { status: 401 });
 		}
-		const vote = await voteKv(platform).getUserVote({
+		const vote = await voteDB(platform).getUserVote({
 			voteId,
 			userId: decoded.phoneNumber
 		});
-		console.log(`getUserVote: ${JSON.stringify(vote)}`);
+		// console.log(`getUserVote: ${JSON.stringify(vote)}`);
 		return addNoCacheHeaders(json(vote.vote))
 	}
 
     if (type === 'all') {
-        const votes = await voteKv(platform).getAllVotes({voteId});
-		console.log(`getAllVotes: ${JSON.stringify(votes)}`);
+        const votes = await voteDB(platform).getAllVotes({voteId});
+		// console.log(`getAllVotes: ${JSON.stringify(votes)}`);
         return addNoCacheHeaders(json(votes.map(v => v.vote)))
     }
 
@@ -73,10 +73,10 @@ export async function POST({ cookies, platform, request }) {
 	if (!decoded.phoneNumber) {
 		return new Response(null, { status: 401 });
 	}
-	let kv = voteKv(platform);
+	let kv = voteDB(platform);
 	// let key = `${id}:vote:${decoded.phoneNumber}`;
 	// await platform?.env.PARTY_KV.put(key, option);
-	console.log(`voteId: ${id}, userId: ${decoded.phoneNumber}, option: ${option}`)
+	// console.log(`voteId: ${id}, userId: ${decoded.phoneNumber}, option: ${option}`)
 	await kv.vote({ voteId: id, userId: decoded.phoneNumber, option, options });
 	// let votes = [];
 	// const allVotes = await platform?.env.PARTY_KV.list({ prefix: 'date:vote:' });
@@ -85,7 +85,7 @@ export async function POST({ cookies, platform, request }) {
 	// 	votes.push(vote);
 	// }
 	let votes = await kv.getAllVotes({voteId: id});
-	console.log(`all votes: ${JSON.stringify(votes)}`)
+	// console.log(`all votes: ${JSON.stringify(votes)}`)
 	// const usersVote = votes.find(v => v.voter === decoded.phoneNumber);
 	// if (!usersVote) {
 	// 	console.log(`add in the user`)

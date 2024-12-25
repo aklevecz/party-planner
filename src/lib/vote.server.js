@@ -53,9 +53,11 @@ const voteDB = (platform) => {
 				.bind(userId, voteId)
 				.first();
 		},
-		/** @param {{voteId:string}} props */
+		/**
+		 * @param {{voteId:string}} props
+		 *  @returns {Promise<{voter: string, vote: string}[]>}
+		 *  */
 		getAllVotes: async ({ voteId }) => {
-			console.log(`getting all votes db`);
 			/** @type {{voter: string, vote: string}[]} */
 			let votes = [];
 			const { results: allVotes } = await platform?.env.DATABASE.prepare(
@@ -63,7 +65,6 @@ const voteDB = (platform) => {
 			)
 				.bind(voteId)
 				.all();
-			console.log(allVotes);
 			return allVotes;
 		}
 	};
