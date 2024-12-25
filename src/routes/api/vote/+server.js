@@ -85,12 +85,12 @@ export async function POST({ cookies, platform, request }) {
 	// }
 	let votes = await kv.getAllVotes({voteId: id});
 	console.log(`all votes: ${JSON.stringify(votes)}`)
-	const usersVote = votes.find(v => v.voter === decoded.phoneNumber);
-	if (!usersVote) {
-		console.log(`add in the user`)
-		votes.push({ voter: decoded.phoneNumber, vote: option });
-		console.log(`votes: ${JSON.stringify(votes)}`)
-	}
+	// const usersVote = votes.find(v => v.voter === decoded.phoneNumber);
+	// if (!usersVote) {
+	// 	console.log(`add in the user`)
+	// 	votes.push({ voter: decoded.phoneNumber, vote: option });
+	// 	console.log(`votes: ${JSON.stringify(votes)}`)
+	// }
 	// return data;
 	return addNoCacheHeaders(json({ success: true, votes: votes.map(v => v.vote) }))
 }
