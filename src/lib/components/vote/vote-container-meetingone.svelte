@@ -57,15 +57,11 @@
 			>
 				<div class="option-content">
 					<span class="option-text">{option.replace(/_/g, ' ')}</span>
-					{#if hasVoted}
 						<span class="vote-count">
 							{getVoteCount(option)} votes ({getPercentage(option)}%)
 						</span>
-					{/if}
 				</div>
-				{#if hasVoted}
 					<div class="progress-bar" style="width: {getPercentage(option)}%"></div>
-				{/if}
 			</button>
 		{/each}
 	</div>
