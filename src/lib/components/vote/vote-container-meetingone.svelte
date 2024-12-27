@@ -58,7 +58,8 @@
 </script>
 
 <div class:disabled={!authSvelte.state.authorized} class="vote-container">
-	<h3>Vote for the {camelToPhrase(meetingOneVote.state.id)}</h3>
+	<h3>Vote for the first meeting</h3>
+	<h3>Meeting will start at 6pm</h3>
 
 	<div class="options-list">
 		{#each Object.keys(meetingOneVote.state.options) as option}
