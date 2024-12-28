@@ -1,14 +1,15 @@
 <script>
 	import ApplyContainer from '$lib/components/apply/apply-container.svelte';
+	import RsvpContainer from '$lib/components/rsvp/rsvp-container.svelte';
 	import app from '$lib/store/app.svelte.js';
 	import applySvelte from '$lib/store/apply.svelte.js';
 	let { data } = $props();
 
 	$effect(() => {
-		app.view = data.view;
+		// app.view = data.view;
+		app.setView(data.view);
 	});
 </script>
-
 <div class="container">
 	<div style="font-weight: 600; font-size: 1.5rem; text-align: center;">
 		Let's throw a party at The Faight Collective
@@ -24,7 +25,8 @@
 		alt="raptor"
 		style="width:170px;height:170px;margin:0rem auto 1rem;display:block;"
 	/>
-	<ApplyContainer />
+	<!-- <ApplyContainer /> -->
+	 <RsvpContainer rsvpId={data.rsvpId}/>
 	<!-- {#if authSvelte.state.authorized}<VoteContainer />{/if} -->
 	<!-- <AuthFlow /> -->
 </div>

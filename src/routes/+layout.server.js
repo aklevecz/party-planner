@@ -5,6 +5,7 @@ export async function load({ cookies, platform, url }) {
 	/** @type {View | null} */
 	const view = /** @type {View} */ (url.searchParams.get('view')) || 'intro';
 	const applyId = cookies.get('applyId');
+	const rsvpId = cookies.get('rsvpId');
 	const token = cookies.get('token');
 	let authorized = false;
 	let user = { phoneNumber: '' };
@@ -20,5 +21,5 @@ export async function load({ cookies, platform, url }) {
 			cookies.delete('token', { path: '/' });
 		}
 	}
-	return { applyId, view, user, authorized };
+	return { applyId, rsvpId, view, user, authorized };
 }

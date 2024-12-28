@@ -7,23 +7,38 @@
 	/** @type {string[]} */
 	let selectedOptions = $state([]);
 	let hasVoted = $state(false);
+	let groupedOptions = $state({});
 
 	onMount(() => {
 		meetingOneVote.getUserVote().then((vote) => {
-			console.log(`user votes: ${JSON.stringify(vote)}`);
 			if (vote) {
-				console.log(`selected vote: ${vote}`);
 				selectedOptions = vote;
 				hasVoted = true;
 			}
 		});
 		meetingOneVote.getAllVotes();
+		groupOptions();
 	});
+
+	function groupOptions() {
+		const options = meetingOneVote.state.options;
+		groupedOptions = Object.keys(options).reduce((/** @type {*} acc */ acc, option) => {
+			const [month, day, time, weekday] = option.split('_');
+			const date = `${month} ${day}`;
+			if (!acc[date]) {
+				acc[date] = [];
+			}
+			acc[date].push({
+				key: option,
+				time,
+				weekday
+			});
+			return acc;
+		}, {});
+	}
 
 	/** @param {string} option */
 	async function handleVote(option) {
-		// if (!hasVoted) {
-		// selectedOptions = option;
 		hasVoted = true;
 		await meetingOneVote.vote(option);
 		meetingOneVote.getUserVote().then((vote) => {
@@ -31,7 +46,6 @@
 				selectedOptions = vote;
 			}
 		});
-		// }
 	}
 
 	/** @param {string} option */
@@ -59,28 +73,35 @@
 
 <div class:disabled={!authSvelte.state.authorized} class="vote-container">
 	<h3>Vote for the first meeting</h3>
-	<h3>Meeting will start at 6pm</h3>
+	<h4 style="color:black;text-align:center">Vote for all times you can make</h4>
 
-	<div class="options-list">
-		{#each Object.keys(meetingOneVote.state.options) as option}
-			<button
-				class="vote-option {isSelected(option) ? 'selected' : ''}"
-				onclick={() => handleVote(option)}
-				disabled={!authSvelte.state.authorized}
-			>
-				<div class="option-content">
-					<div class="option-left">
-						{#if isSelected(option)}
-							<span class="checkmark">✓</span>
-						{/if}
-						<span class="option-text">{option.replace(/_/g, ' ')}</span>
-					</div>
-					<span class="vote-count">
-						{getVoteCount(option)} votes ({getPercentage(option)}%)
-					</span>
+	<div class="dates-list">
+		{#each Object.entries(groupedOptions) as [date, timeSlots]}
+			<div class="date-group">
+				<h5 class="date-header">{date} ({timeSlots[0].weekday})</h5>
+				<div class="options-list">
+					{#each timeSlots as slot}
+						<button
+							class="vote-option {isSelected(slot.key) ? 'selected' : ''}"
+							on:click={() => handleVote(slot.key)}
+							disabled={!authSvelte.state.authorized}
+						>
+							<div class="option-content">
+								<div class="option-left">
+									{#if isSelected(slot.key)}
+										<span class="checkmark">✓</span>
+									{/if}
+									<span class="option-text">{slot.time}</span>
+								</div>
+								<span class="vote-count">
+									{getVoteCount(slot.key)} votes
+								</span>
+							</div>
+							<div class="progress-bar" style="width: {getPercentage(slot.key)}%"></div>
+						</button>
+					{/each}
 				</div>
-				<div class="progress-bar" style="width: {getPercentage(option)}%"></div>
-			</button>
+			</div>
 		{/each}
 	</div>
 
@@ -94,7 +115,7 @@
 		opacity: 0.5;
 	}
 	.vote-container {
-		max-width: 500px;
+		max-width: 600px;
 		margin: 20px auto;
 		padding: 20px;
 		background: var(--color-foreground);
@@ -109,16 +130,34 @@
 		color: black;
 	}
 
+	.dates-list {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+
+	.date-group {
+		background: #f8f9fa;
+		border-radius: 8px;
+		padding: 16px;
+	}
+
+	.date-header {
+		margin: 0 0 12px 0;
+		color: #2c3e50;
+		font-size: 1.1rem;
+	}
+
 	.options-list {
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
+		gap: 8px;
 	}
 
 	.vote-option {
 		position: relative;
 		width: 100%;
-		padding: 16px;
+		padding: 12px;
 		border: 2px solid #e0e0e0;
 		border-radius: 8px;
 		background: var(--color-foreground);
@@ -130,14 +169,11 @@
 
 	.vote-option:hover:not(:disabled) {
 		border-color: #4a90e2;
-		background: #f8f9fa;
+		background: #ffffff;
 	}
 
 	.vote-option.selected {
 		border-color: #4a90e2;
-		/* border-color: #56d569; */
-		/* background: #f0f7ff; */
-		/* background: #56d569; */
 	}
 
 	.vote-option:disabled {
@@ -164,13 +200,6 @@
 		justify-content: space-between;
 		align-items: center;
 		gap: 10px;
-		position: relative;
-		z-index: 2;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		gap: 10px;
-		width: 100%;
 	}
 
 	.option-text {
@@ -207,8 +236,12 @@
 			padding: 15px;
 		}
 
-		.vote-option {
+		.date-group {
 			padding: 12px;
+		}
+
+		.vote-option {
+			padding: 10px;
 		}
 	}
 </style>

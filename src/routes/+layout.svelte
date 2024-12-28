@@ -5,6 +5,7 @@
 	import Header from '$lib/components/header.svelte';
 	import '../app.css';
 	import authSvelte from '$lib/store/auth.svelte';
+	import rsvpSvelte from '$lib/store/rsvp.svelte';
 
 	/** @type {{ data: import('./$types').LayoutData, children: import('svelte').Snippet }} */
 	let { data, children } = $props();
@@ -12,6 +13,9 @@
 	onMount(() => {
 		if (data.applyId) {
 			applySvelte.getExistingRecord();
+		}
+		if (data.rsvpId) {
+			rsvpSvelte.getExistingRecord();
 		}
 		authSvelte.init(data);
 	});

@@ -1,4 +1,4 @@
-/** @typedef {'intro' | 'apply-form' | 'receipt'} View */
+/** @typedef {'intro' | 'apply-form' | 'receipt' | 'info' | 'rsvped'} View */
 
 /** @typedef {{ id: number; name: string; email: string; message: string; feedback: string; created_at: string }} ApplyRecord */
 

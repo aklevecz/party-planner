@@ -135,11 +135,26 @@ export const dayOfTheWeekVote = createVoteStore(
 export const meetingOneVote = createVoteStore(
 	'meetOneVote',
 	{
-		January_6_Monday: 0,
-		January_7_Tuesday: 0,
-		January_8_Wednesday: 0,
-		January_9_Thursday: 0,
-		January_11_Friday: 0
+		January_6th_5pm_Monday: 0,
+		January_6th_6pm_Monday: 0,
+		January_6th_7pm_Monday: 0,
+		January_6th_8pm_Monday: 0,
+		January_7th_5pm_Tuesday: 0,
+		January_7th_6pm_Tuesday: 0,
+		January_7th_7pm_Tuesday: 0,
+		January_7th_8pm_Tuesday: 0,
+		January_8th_5pm_Wednesday: 0,
+		January_8th_6pm_Wednesday: 0,
+		January_8th_7pm_Wednesday: 0,
+		January_8th_8pm_Wednesday: 0,
+		January_9th_5pm_Thursday: 0,
+		January_9th_6pm_Thursday: 0,
+		January_9th_7pm_Thursday: 0,
+		January_9th_8pm_Thursday: 0,
+		January_10th_5pm_Friday: 0,
+		January_10th_6pm_Friday: 0,
+		January_10th_7pm_Friday: 0,
+		January_10th_8pm_Friday: 0
 	},
 	{
 		multipleVotes: true

@@ -22,3 +22,19 @@ export function camelToPhrase(text) {
 			.trim()
 	);
 }
+
+/** @param {string} phoneNumber */
+export function hashPhoneNumber(phoneNumber) {
+	// Remove any non-numeric characters
+	const cleaned = phoneNumber.replace(/\D/g, '');
+	
+	// Simple multiplicative hash
+	let hash = 0;
+	for (let i = 0; i < cleaned.length; i++) {
+		// Use prime numbers for better distribution
+		hash = ((hash << 5) - hash + parseInt(cleaned[i])) | 0;
+	}
+	
+	// Ensure positive number and convert to string
+	return Math.abs(hash).toString(16);
+}

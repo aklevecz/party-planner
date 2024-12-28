@@ -25,7 +25,7 @@
 	<!-- <div class="textcenter">Things will be voted on here</div> -->
 	<!-- <VoteContainer /> -->
 	<!-- <VoteContainerDow/> -->
-	<VoteContainerMeetingone />
+	<!-- <VoteContainerMeetingone /> -->
 </div>
 
 <style>
