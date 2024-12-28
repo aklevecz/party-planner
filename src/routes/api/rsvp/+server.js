@@ -27,11 +27,11 @@ export async function POST({ cookies, platform, request }) {
 	try {
 		await platform?.env.DATABASE.prepare(
 			`
-			INSERT OR REPLACE INTO raptor_rsvps (phone_number, event_name) 
-			VALUES (?, ?)
+			INSERT OR REPLACE INTO raptor_rsvps (name, phone_number, event_name) 
+			VALUES (?, ?, ?)
 		`
 		)
-			.bind(phoneNumber, 'faight')
+			.bind(name, phoneNumber, 'faight')
 			.run();
 	} catch (/** @type {*} */ e) {
 		// This is ignored currently because im allowing updates
