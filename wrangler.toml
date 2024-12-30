@@ -30,6 +30,10 @@ binding = "DATABASE"
 database_name = "database"
 database_id = "476fa768-0f3f-4121-9820-7cf92be3ee6b"
 
+[[queues.producers]]
+binding = "MESSENGER_QUEUE"
+queue = "messenger-queue"
+
 # Bind a Durable Object. Durable objects are a scale-to-zero compute primitive based on the actor model.
 # Durable Objects can live for as long as needed. Use these when you need a long-running "server", such as in realtime apps.
 # Docs: https://developers.cloudflare.com/workers/runtime-apis/durable-objects

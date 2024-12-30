@@ -11,6 +11,7 @@ declare global {
 				DATABASE: D1Database;
 				PARTY_KV: KVNamespace;
 				AUTH_SERVICE: any;
+				MESSENGER_QUEUE: any;
 			};
 		}
 	}
