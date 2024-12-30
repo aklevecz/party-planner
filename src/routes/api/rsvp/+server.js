@@ -44,22 +44,30 @@ export async function POST({ cookies, platform, request }) {
 	await cookies.set('rsvpId', token, {
 		path: '/'
 	});
-	await platform?.env.PARTY_KV.put(`faight:rsvp:${token}`, phoneNumber);
-	const message = `hi ${name?.split(' ')[0]}! you are signed up to receive updates about the party @ The Faight on February 8th`;
 
-	const tempHeaderAuth = {
-		'z-auth': 'x-chicken-x'
-	};
-	const endpoint = 'https://los.baos.haus/messaging/send';
-	await fetch(endpoint, {
-		method: 'POST',
-		headers: tempHeaderAuth,
-		body: JSON.stringify({
-			message,
-			firstName: name?.split(' ')[0],
-			phoneNumber 
-		})
-	});
+	const kvKey = `faight:rsvp:${token}`;
+	const existingRsvp = await platform?.env.PARTY_KV.get(kvKey);
+
+	if (!existingRsvp) {
+		await platform?.env.PARTY_KV.put(`faight:rsvp:${token}`, phoneNumber);
+		const message = `hi ${name?.split(' ')[0]}! you are signed up to receive updates about the party @ The Faight on February 8th`;
+
+		await platform?.env.MESSENGER_QUEUE.send({contextMessage: message, phoneNumber})
+		console.log(`sent message ${message} to ${phoneNumber}`);
+		// const tempHeaderAuth = {
+		// 	'z-auth': 'x-chicken-x'
+		// };
+		// const endpoint = 'https://los.baos.haus/messaging/send';
+		// await fetch(endpoint, {
+		// 	method: 'POST',
+		// 	headers: tempHeaderAuth,
+		// 	body: JSON.stringify({
+		// 		message,
+		// 		firstName: name?.split(' ')[0],
+		// 		phoneNumber
+		// 	})
+		// });
+	}
 	return json({ success: true, name, id: token });
 }
 
