@@ -48,11 +48,15 @@ export async function POST({ cookies, platform, request }) {
 	const kvKey = `faight:rsvp:${token}`;
 	const existingRsvp = await platform?.env.PARTY_KV.get(kvKey);
 
+	if (existingRsvp) {
+		console.log("THERE IS EXISTING RSVP")
+	}
 	if (!existingRsvp) {
-		await platform?.env.PARTY_KV.put(`faight:rsvp:${token}`, phoneNumber);
+		console.log("CREATING NEW RSVP")
+		await platform?.env.PARTY_KV.put(kvKey, phoneNumber);
 		const message = `hi ${name?.split(' ')[0]}! you are signed up to receive updates about the party @ The Faight on February 8th`;
 
-		await platform?.env.MESSENGER_QUEUE.send({contextMessage: message, phoneNumber})
+		await platform?.env.MESSENGER_QUEUE.send({ contextMessage: message, phoneNumber });
 		console.log(`sent message ${message} to ${phoneNumber}`);
 		// const tempHeaderAuth = {
 		// 	'z-auth': 'x-chicken-x'
