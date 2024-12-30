@@ -51,8 +51,7 @@ export async function POST({ cookies, platform, request }) {
 	if (existingRsvp) {
 		console.log("THERE IS EXISTING RSVP")
 	}
-	// if (!existingRsvp) {
-	if (true) {
+	if (!existingRsvp) {
 		console.log("CREATING NEW RSVP")
 		await platform?.env.PARTY_KV.put(kvKey, phoneNumber);
 		const firstName = name?.split(' ')[0]
