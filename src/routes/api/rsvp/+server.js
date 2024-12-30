@@ -57,7 +57,7 @@ export async function POST({ cookies, platform, request }) {
 		const firstName = name?.split(' ')[0]
 		const defaultMessage = `hi ${firstName}! you are signed up to receive updates about the party @ The Faight on February 8th`;
 		const contextMessage = `my name is ${firstName}. generate a poem confirming that i am signed up for updates for the Raptor party at The Faight on February 8th`
-		await platform?.env.MESSENGER_QUEUE.send({ contextMessage, defaultMessage, phoneNumber });
+		await platform?.env.MESSENGER_QUEUE.send({ contextMessage, defaultMessage, phoneNumber: phoneNumber.replace('+', '') });
 		console.log(`message queued to ${phoneNumber}`);
 		// const tempHeaderAuth = {
 		// 	'z-auth': 'x-chicken-x'
