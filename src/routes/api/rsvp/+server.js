@@ -58,18 +58,14 @@ export async function POST({ cookies, platform, request }) {
 		const defaultMessage = `hi ${firstName}! you are signed up to receive updates about the party @ The Faight on February 8th`;
 		const contextMessage = `my name is ${firstName}. generate a poem confirming that i am signed up for updates for the Raptor party at The Faight on February 8th`
 		
-		const queueOperation = platform?.env.MESSENGER_QUEUE.send({ 
-			contextMessage, 
-			defaultMessage, 
-			phoneNumber: phoneNumber.replace('+', '') 
-		});
-		
-		// Wait for the immediate operation
-		await queueOperation;
-		console.log(`message queued to ${phoneNumber}`);
-		
-		// Ensure the queue operation completes even after response is sent
-		platform?.context.waitUntil(queueOperation);
+		platform?.context.waitUntil(
+			platform?.env.MESSENGER_QUEUE.send({ 
+				contextMessage, 
+				defaultMessage, 
+				phoneNumber: phoneNumber.replace('+', '') 
+			})
+		);
+
 		// const tempHeaderAuth = {
 		// 	'z-auth': 'x-chicken-x'
 		// };
