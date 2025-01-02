@@ -57,7 +57,6 @@ const createApplyStore = () => {
 				message
 			});
 			const newState = { id: data.id, name: data.name, email: data.email, message: data.message };
-			console.log(`newState: ${JSON.stringify(newState)}`)
 			apply = newState;
 			await delay(2000)
 			fetching = false;

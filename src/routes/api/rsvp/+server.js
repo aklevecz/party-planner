@@ -65,20 +65,6 @@ export async function POST({ cookies, platform, request }) {
 				phoneNumber: phoneNumber.replace('+', '') 
 			})
 		);
-
-		// const tempHeaderAuth = {
-		// 	'z-auth': 'x-chicken-x'
-		// };
-		// const endpoint = 'https://los.baos.haus/messaging/send';
-		// await fetch(endpoint, {
-		// 	method: 'POST',
-		// 	headers: tempHeaderAuth,
-		// 	body: JSON.stringify({
-		// 		message,
-		// 		firstName: name?.split(' ')[0],
-		// 		phoneNumber
-		// 	})
-		// });
 	}
 	return json({ success: true, name, id: token });
 }

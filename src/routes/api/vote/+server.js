@@ -28,37 +28,31 @@ export async function GET({ cookies, platform, url }) {
 	const voteId = url.searchParams.get('id');
 
 	if (!type || !voteId) {
-		console.log('vote:get no type or id');
 		return new Response(null, { status: 401 });
 	}
 
 	if (type === 'user') {
 		const token = cookies.get('token');
 		if (!token) {
-			console.log('vote:get no token');
 			return new Response(null, { status: 401 });
 		}
 		// const decoded = await verifyAndDecodeJwt(token);
 		const decoded = await platform?.env.AUTH_SERVICE.authorizeToken(token);
 		if (!decoded.phoneNumber) {
-			console.log('vote:get no phone number');
 			return new Response(null, { status: 401 });
 		}
 		const vote = await voteDB(platform).getUserVote({
 			voteId,
 			userId: decoded.phoneNumber
 		});
-		// console.log(`getUserVote: ${JSON.stringify(vote)}`);
 		return addNoCacheHeaders(json(vote.vote))
 	}
 
     if (type === 'all') {
         const votes = await voteDB(platform).getAllVotes({voteId});
-		// console.log(`getAllVotes: ${JSON.stringify(votes)}`);
         return addNoCacheHeaders(json(votes.map(v => v.vote)))
     }
 
-	console.log('vote:get unknown error');
     return new Response(null, { status: 401 });
 }
 

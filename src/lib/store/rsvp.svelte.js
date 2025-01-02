@@ -60,16 +60,13 @@ const creatersvpStore = () => {
 				name: data.name,
 				phoneNumber: data.phoneNumber
 			};
-			console.log(`newState: ${JSON.stringify(newState)}`);
 			rsvp = { ...rsvp, ...newState };
 			await delay(2000);
 			fetching = false;
 		},
 		getExistingRecord: async () => {
-			console.log(`Fetching existing record`);
 			const data = await api.getExistingRecords();
 			if (data) {
-				console.log(data);
 				const newState = { eventName: data.event_name, phoneNumber: data.phone_number };
 				rsvp = { ...rsvp, ...newState };
 			} else {

@@ -81,7 +81,6 @@ export function createAuth() {
 		/** @param {string} code */
 		verifyCode: async (code) => {
 			const data = await api.verifyCode(code);
-			console.log('api verifyCode:', data);
 			if (data.message === responses.AUTHED) {
 				auth.authorized = true;
 				return true;
