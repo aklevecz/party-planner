@@ -1,46 +1,30 @@
 <script>
+	import TeamMember from '$lib/components/team/team-member.svelte';
+
 	/** @type {{ data: import('./$types').PageData }} */
 	let { data } = $props();
 </script>
 
 <h1>Team</h1>
-<div style="padding: 10px;">
-	<div class="team-member">
-		<img src="/dj_baobao.jpg" alt="baobao" />
-		<div class="team-member-info">
-			<h3>Dj Baobao</h3>
-			<div>Director of vibes</div>
-		</div>
-	</div>
+<div class="container">
+	<TeamMember name="DJ Baobao" role="Director of Vibes" imgUrl="/dj_baobao.jpg" />
+	<TeamMember name="Tise Ben-Eka" role="Chief Curiosity Officer" imgUrl="/tise-raptor.jpeg" />
 </div>
 
 <style>
+	.container {
+		display: flex;
+		flex-direction: column;
+		gap: 50px;
+	}
 	h1 {
 		text-align: center;
 	}
 
-	h3 {
-		margin:0;
-	}
-
-	.team-member {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 200px;
-		gap: 1rem;
-		flex-direction: column;
-		margin: auto;
-	}
-	.team-member img {
-		width: 200px;
-		height: 200px;
-	}
-	.team-member-info {
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		width: 100%;
+	@media (min-width: 768px) {
+		.container {
+			flex-direction: row;
+			justify-content: center;
+		}
 	}
 </style>
