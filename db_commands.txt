@@ -8,4 +8,14 @@ npx wrangler d1 execute DATABASE \
   --local --command "CREATE TABLE IF NOT EXISTS raptors (phone_number TEXT PRIMARY KEY, color TEXT);"
 
 npx wrangler d1 execute DATABASE \
-  --local --command "CREATE TABLE IF NOT EXISTS votes (id INTEGER PRIMARY KEY AUTOINCREMENT, vote_id TEXT NOT NULL, voter_id TEXT NOT NULL, vote TEXT NOT NULL, UNIQUE(vote_id, voter_id))"
+  --remote --command "CREATE TABLE IF NOT EXISTS votes (id INTEGER PRIMARY KEY AUTOINCREMENT, vote_id TEXT NOT NULL, voter_id TEXT NOT NULL, vote TEXT NOT NULL, UNIQUE(vote_id, voter_id))"
+
+
+npx wrangler d1 execute DATABASE \
+--local --command "SELECT * FROM raptor_rsvps;"
+
+npx wrangler d1 execute DATABASE \
+  --local --command "CREATE TABLE IF NOT EXISTS raptor_rsvps (phone_number TEXT, event_name TEXT, PRIMARY KEY(phone_number, event_name));"
+
+  npx wrangler d1 execute DATABASE \
+  --remote --command "ALTER TABLE raptor_rsvps ADD COLUMN name TEXT;"
