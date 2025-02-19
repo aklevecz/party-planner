@@ -3,10 +3,10 @@
 	--gold: #fdb243;
 	--orange: #ff9a25;
 	--black: #241e20;
-	--nav-green: #389c67;
-	--color-background: darkslategrey;
-	--color-foreground: rgba(245, 245, 245, 0.9);
-	--color-interactive: rgb(68, 116, 116);
+	--nav-green: #ffae00;
+	--color-background: rgb(255, 197, 61);
+	--color-foreground: rgba(0, 0, 0, 0.9);
+	--color-interactive: rgb(0, 0, 0);
 	/* --color-background: var(--black);
 	--color-foreground: var(--gold);
 	--color-interactive: var(--red); */
@@ -41,7 +41,6 @@ button {
 	color: var(--color-foreground);
 	color: white;
 	border: none;
-	background-color: #389c67;
 	border-radius: var(--pill-border-radius);
 	margin: auto;
 	padding: 0.5rem 1.5rem;
@@ -95,5 +94,6 @@ textarea::placeholder {
 button {
 	margin: 2rem auto;
 	font-size: 1.25rem;
-	padding-top: 8px;
+	font-weight: bold;
+	padding: .75rem 1.5rem;
 }

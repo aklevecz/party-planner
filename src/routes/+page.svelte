@@ -12,8 +12,37 @@
 </script>
 
 <div class="container">
-	<div class="header">Let's throw ANOTHER party at The Faight Collective</div>
-	<div class="divider"></div>
+	<div class="header">
+		<img
+			src="concert-raptors-text-logo.png"
+			style="width:200px;"
+			alt="concert raptors text logo"
+		/>
+		<svg class="animated-x" viewBox="0 0 100 100" width="50" height="50">
+			<!-- First diagonal of the X -->
+			<path
+				class="line first"
+				d="M10,10 L90,90"
+				stroke="black"
+				stroke-width="9"
+				fill="none"
+			/>
+			<!-- Second diagonal of the X -->
+			<path
+				class="line second"
+				d="M90,10 L10,90"
+				stroke="black"
+				stroke-width="8"
+				fill="none"
+			/>
+		</svg>
+		<img
+			src="faight-assets/FaightLogoW_Aura.png"
+			style="width:250px; margin: auto; display: block;"
+			alt="faight logo"
+		/>
+	</div>
+	<!-- <div class="divider"></div> -->
 	<div class="image-container">
 		<!-- Base image -->
 		<img
@@ -45,8 +74,9 @@
 
 	.header {
 		font-weight: 600;
-		font-size: 1.5rem;
-		text-align: center;
+		font-size: 2rem;
+		width: 100%;
+		margin-left: 2rem;
 	}
 
 	.divider {
@@ -102,4 +132,22 @@
 			transform: scale(1) skew(0deg, 0deg);
 		}
 	}
+
+/* Both lines share the basic dash settings */
+.animated-x .line {
+	stroke-dasharray: 113; /* Approximate length of one diagonal */
+	stroke-dashoffset: 113;
+	animation: draw-x 1s ease forwards;
+}
+
+/* Delay the second line so it draws after the first */
+.animated-x .second {
+	animation-delay: 1s;
+}
+
+@keyframes draw-x {
+	to {
+		stroke-dashoffset: 0;
+	}
+}
 </style>

@@ -36,7 +36,6 @@
 {/snippet}
 <div class="container">
 	<!-- <img src="/raptor-svg.svg" alt="raptor" /> -->
-	<h1>Raptor Faight</h1>
 	<nav class="desktop-nav">
 		{@render navLinks()}
 	</nav>
@@ -68,9 +67,11 @@
 		align-items: center;
 		justify-content: center;
 		gap: 0.5rem;
-		position: relative;
+		position: absolute;
+		width: 100%;
+		background: transparent;
 		padding: 1rem;
-		background-color: var(--nav-green);
+		/* background-color: var(--nav-green); */
 		height:50px;
 	}
 
