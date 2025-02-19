@@ -40,7 +40,8 @@
 		{@render navLinks()}
 	</nav>
 	<button class="nav-toggle" onclick={toggleNav} aria-label="Toggle navigation">
-		<span class="hamburger {isNavOpen ? 'open' : ''}"></span>
+		<!-- <span class="hamburger {isNavOpen ? 'open' : ''}"></span> -->
+		Menu
 	</button>
 </div>
 
@@ -67,7 +68,8 @@
 		align-items: center;
 		justify-content: center;
 		gap: 0.5rem;
-		position: absolute;
+		position: fixed;
+		bottom: 0;
 		width: 100%;
 		background: transparent;
 		padding: 1rem;
@@ -87,12 +89,13 @@
 
 	.nav-toggle {
 		position: absolute;
-		right: 1rem;
-		background: none;
+		right: .5rem;
+		/* background: none; */
 		border: none;
 		cursor: pointer;
-		padding: 0.5rem;
+		/* padding: 0.5rem; */
 		z-index: 1000;
+		font-size: 1rem;
 	}
 
 	.hamburger {

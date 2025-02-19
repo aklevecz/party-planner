@@ -19,14 +19,15 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		/* width: 200px; */
+		width: 300px;
 		gap: 1rem;
 		flex-direction: column;
+		margin: auto;
 		/* margin: auto; */
 	}
 	.team-member img {
-		width: 200px;
-		height: 200px;
+		width: 300px;
+		height: 300px;
 	}
 	.team-member-info {
 		height: 100%;
