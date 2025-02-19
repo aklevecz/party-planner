@@ -25,8 +25,8 @@
 		alt="raptor"
 		style="width:170px;height:170px;margin:0rem auto 1rem;display:block;"
 	/>
-	<!-- <ApplyContainer /> -->
-	 <RsvpContainer rsvpId={data.rsvpId}/>
+	<ApplyContainer />
+	 <!-- <RsvpContainer rsvpId={data.rsvpId}/> -->
 	<!-- {#if authSvelte.state.authorized}<VoteContainer />{/if} -->
 	<!-- <AuthFlow /> -->
 </div>

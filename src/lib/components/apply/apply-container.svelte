@@ -22,7 +22,7 @@
 		<div>{applySvelte.state.email}</div>
 		<div style="margin-top:1rem;">{applySvelte.state.message}</div>
 	</div>
-	<button style="margin:2rem 0;" onclick={goToApplyForm}>Change Answers</button>
+	<button style="" onclick={goToApplyForm}>Change Answers</button>
 {:else if !hasApplied && app.view === 'intro'}
 	<!-- <div>This will fittingly be a collective effort</div> -->
 	<div>Interested in helping out?</div>
@@ -31,7 +31,7 @@
 	<h3>Project Managers</h3>
 	<div>Do you enjoy organizing ideas, people, and scheduling?</div>
 	<div>Well boy howdy let's see if we can find your talents a place for this rager</div> -->
-	<button style="margin: 2rem auto;font-size:1.5rem;" onclick={goToApplyForm}>Apply</button>
+	<button style="" onclick={goToApplyForm}>Apply</button>
 {/if}
 
 {#if app.view === 'apply-form'}

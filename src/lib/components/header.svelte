@@ -30,6 +30,7 @@
 		<li><a href="/">Home</a></li>
 		<li><a href="/vote">Vote</a></li>
 		<li><a href="/team">Team</a></li>
+		<li><a href="/gallery">Gallery</a></li>
 		<li><a href="/profile">Profile</a></li>
 	</ul>
 {/snippet}

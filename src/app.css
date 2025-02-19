@@ -1,8 +1,8 @@
 :root {
-	--red: #EB1C24;
-	--gold: #FDB243;
+	--red: #eb1c24;
+	--gold: #fdb243;
 	--orange: #ff9a25;
-	--black: #241E20;
+	--black: #241e20;
 	--nav-green: #389c67;
 	--color-background: darkslategrey;
 	--color-foreground: rgba(245, 245, 245, 0.9);
@@ -12,7 +12,7 @@
 	--color-interactive: var(--red); */
 	--border-radius: 5px;
 	--pill-border-radius: 40px;
-	--padding-interactive: .5rem .5rem;
+	--padding-interactive: 0.5rem 0.5rem;
 	--font-size-interactive: 1rem;
 }
 * {
@@ -20,7 +20,7 @@
 }
 html,
 body {
-	margin:0;
+	margin: 0;
 	font-family: sans-serif;
 	background-color: var(--color-background);
 	color: var(--color-foreground);
@@ -40,17 +40,17 @@ textarea {
 button {
 	color: var(--color-foreground);
 	color: white;
-	border:none;
+	border: none;
 	background-color: #389c67;
 	border-radius: var(--pill-border-radius);
 	margin: auto;
-	padding: .5rem 1.5rem;
+	padding: 0.5rem 1.5rem;
 }
 
 textarea {
 	font-size: 1rem;
 	height: 140px;
-	padding: .75rem;
+	padding: 0.75rem;
 }
 
 button {
@@ -62,9 +62,9 @@ button:hover {
 }
 
 button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background-color: #cccccc;
+	opacity: 0.5;
+	cursor: not-allowed;
+	background-color: #cccccc;
 }
 
 input,
@@ -85,9 +85,15 @@ textarea::placeholder {
 }
 
 .autoblock {
-    margin:auto;
-    display: block;
+	margin: auto;
+	display: block;
 }
 .textcenter {
-    text-align: center;
+	text-align: center;
+}
+
+button {
+	margin: 2rem auto;
+	font-size: 1.25rem;
+	padding-top: 8px;
 }
