@@ -5,6 +5,10 @@ npx wrangler d1 execute DATABASE \
  --local --command "CREATE TABLE party_planner_apply (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL UNIQUE, message TEXT NOT NULL, feedback TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"
 
 npx wrangler d1 execute DATABASE \
+ --local --command "ALTER TABLE party_planner_apply ADD COLUMN event_name TEXT DEFAULT 'raptor-faight-1';"
+
+
+npx wrangler d1 execute DATABASE \
   --local --command "CREATE TABLE IF NOT EXISTS raptors (phone_number TEXT PRIMARY KEY, color TEXT);"
 
 npx wrangler d1 execute DATABASE \

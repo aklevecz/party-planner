@@ -1,6 +1,8 @@
 import { createJwt, verifyAndDecodeJwt } from '$lib/auth.server';
 import { json } from '@sveltejs/kit';
 
+const CURRET_EVENT = "raptor-faight-2"
+
 /** @type {import('./$types').RequestHandler} */
 export async function GET({cookies, platform, url }) {
 	// const token = url.searchParams.get('id');
@@ -14,23 +16,24 @@ export async function GET({cookies, platform, url }) {
 	const { id } = await verifyAndDecodeJwt(applyToken);
 	// let { id } = await platform?.env.AUTH_SERVICE.authorizeToken(token);
 	const existingRecord = await platform?.env.DATABASE.prepare(
-		'SELECT * FROM party_planner_apply WHERE id = ?'
+		'SELECT * FROM party_planner_apply WHERE id = ? AND event_name = ?'
 	)
-		.bind(id)
+		.bind(id, CURRET_EVENT)
 		.first();
 	return json(existingRecord);
 }
 
 export async function POST({ cookies, platform, request }) {
 	const { name, email, message } = await request.json();
+
 	try {
 		await platform?.env.DATABASE.prepare(
 			`
-			INSERT OR REPLACE INTO party_planner_apply (name, email, message) 
-			VALUES (?, ?, ?)
+			INSERT OR REPLACE INTO party_planner_apply (name, email, message, event_name) 
+			VALUES (?, ?, ?, ?)
 		`
 		)
-			.bind(name, email, message)
+			.bind(name, email, message, CURRET_EVENT)
 			.run();
 	} catch (/** @type {*} */ e) {
 		// This is ignored currently because im allowing updates
@@ -39,9 +42,9 @@ export async function POST({ cookies, platform, request }) {
 		}
 	}
 	const checkRecord = await platform?.env.DATABASE.prepare(
-		'SELECT * FROM party_planner_apply WHERE email = ?'
+		'SELECT * FROM party_planner_apply WHERE email = ? AND event_name = ?'
 	)
-		.bind(email)
+		.bind(email, CURRET_EVENT)
 		.first();
 
 	const token = await createJwt({ id: checkRecord.id });
